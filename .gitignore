@@ -58,3 +58,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# unnecessary folders
+/brick breaker/Temp/
+/brick breaker/Library/

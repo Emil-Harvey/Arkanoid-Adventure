@@ -21,8 +21,9 @@ public class GUItext : MonoBehaviour
         {// all bricks broken
 
             UIpanel.transform.position = new Vector3(0, 0, 0);
+            UIpanel.GetComponent<VerticalLayoutGroup>().padding.bottom = 3;
             scoreText.text = "Well Done! level complete" +
-                "SCORE  " + ballScript.score+
+                "SCORE  " + ballScript.score +
                 "\npress enter to continue";
 
             gameState = winLose.won;
@@ -45,7 +46,8 @@ public class GUItext : MonoBehaviour
             //  show end screen
 
             UIpanel.transform.position = new Vector3(0, 0, 0);
-            //scoreText.
+            UIpanel.GetComponent<VerticalLayoutGroup>().padding.bottom = 3;
+
             scoreText.text = "Game Over " +
                 "SCORE  " + ballScript.score +
                 "\npress enter to continue";
@@ -59,7 +61,7 @@ public class GUItext : MonoBehaviour
     void Start()
     {
         gameState = winLose.playing;
-        scoreText.text = "SCORE  " + ballScript.score + "\t LIVES  " + ballScript.lives;
+        scoreText.text = "SCORE  " + ballScript.score + " LIVES  " + ballScript.lives;
     }
 
     // Update is called once per frame
@@ -67,7 +69,7 @@ public class GUItext : MonoBehaviour
     {
         if (gameState == winLose.playing)
         {
-            scoreText.text = "SCORE  " + ballScript.score + "\t LIVES  " + ballScript.lives;
+            scoreText.text = "SCORE  " + ballScript.score + " LIVES  " + ballScript.lives;
             CheckWin();
             CheckLose();
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -76,7 +78,7 @@ public class GUItext : MonoBehaviour
             }
 
         }
-        else if(Input.GetKeyDown(KeyCode.Return))
+        else if(Input.GetKeyDown(KeyCode.Return))// game is over, enter to return to menu
         {
             Application.LoadLevel(0);
         }

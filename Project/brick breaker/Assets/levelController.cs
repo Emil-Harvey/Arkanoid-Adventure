@@ -9,9 +9,11 @@ public class levelController : MonoBehaviour
     //[SerializeField]
     //private levelNumber levelSet;
 
+    // called by the UI buttons
     public void SetLevel(int level)
     {
         Application.LoadLevel(level);
+        //ballScript.lives = 3;
     }
 
 

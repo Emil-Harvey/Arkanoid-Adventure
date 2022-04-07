@@ -14,24 +14,25 @@ public class ballScript : MonoBehaviour
     private bool isFree;
     private Vector3 paddleXYZ;
 
+    int speed = 3;
 
     public static int score = 0;
 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
-        //Debug.Log("collided" + xDir);
+        
+        Debug.Log("collided with: "+ collision.gameObject.name + " (" + xDir + ", " + yDir+")");
        
-        if (xCollide.IsTouching(collision.collider)) { xDir = -xDir; }//   bounce
-        if (yCollide.IsTouching(collision.collider)) { yDir = -yDir; }
-        if (xyCollide.IsTouching(collision.collider)) {
-            yDir = -yDir;
-            xDir = -xDir;
+        if (xyCollide.IsTouching(collision.collider)) {//   bounce
+           yDir = -yDir;
+           xDir = -xDir;
         }
+        else if (xCollide.IsTouching(collision.collider)) { xDir = -xDir; }
+        else if (yCollide.IsTouching(collision.collider)) { yDir = -yDir; }
 
         gameObject.transform.Translate(xDir * 0.12f, yDir * 0.12f, 0.0f);//exit collision
-
+        Debug.Log("new dir: (" + xDir + ", " + yDir + ")");
     }
 
     private void Reset()
@@ -44,16 +45,17 @@ public class ballScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        lives = 3;
         Reset();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("score " + score);
+        //Debug.Log("score " + score);
         if (isFree)
         {
-            gameObject.transform.Translate(xDir * 0.1f, yDir * 0.1f, 0.0f);
+            gameObject.transform.Translate(xDir * speed * Time.deltaTime , yDir * speed * Time.deltaTime, 0.0f);
         }
         else
         {
@@ -79,12 +81,12 @@ public class ballScript : MonoBehaviour
             //  out of bounds
             lives -= 1;
             Reset();
-            Debug.Log("lives " + lives);
+            //Debug.Log("lives " + lives);
 
 
         }
-        }
-
     }
+
+}
 
 ;
