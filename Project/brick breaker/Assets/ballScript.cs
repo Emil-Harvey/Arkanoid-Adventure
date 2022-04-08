@@ -10,7 +10,7 @@ public class ballScript : MonoBehaviour
     public GameObject paddle;
     public BoxCollider2D xCollide;
     public BoxCollider2D yCollide;
-    public BoxCollider2D xyCollide;// for corners
+    public CircleCollider2D xyCollide;// for corners
     private bool isFree;
     private Vector3 paddleXYZ;
 

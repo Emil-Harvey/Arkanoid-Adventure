@@ -22,6 +22,7 @@ public class GUItext : MonoBehaviour
 
             UIpanel.transform.position = new Vector3(0, 0, 0);
             UIpanel.GetComponent<VerticalLayoutGroup>().padding.bottom = 3;
+            scoreText.color = new Color(0.25f, 0.90f, 0.1f);
             scoreText.text = "Well Done! level complete" +
                 "SCORE  " + ballScript.score +
                 "\npress enter to continue";
@@ -36,7 +37,7 @@ public class GUItext : MonoBehaviour
         if (ballScript.lives < 0 && gameState == winLose.playing)// gaem over
         {
             Debug.Log("game over");
-            //scoreText.color = Color.white;
+            scoreText.color = new Color (0.5f,0.0f,0.0f);
             // kill all bricks & paddles
             GameObject[] allObjects = GameObject.FindGameObjectsWithTag("perish");
             foreach (GameObject obj in allObjects)
@@ -60,8 +61,10 @@ public class GUItext : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         gameState = winLose.playing;
-        scoreText.text = "SCORE  " + ballScript.score + " LIVES  " + ballScript.lives;
+        scoreText.text = "SCORE\t" + ballScript.score + " LIVES  " + ballScript.lives;
+        scoreText.color = new Color(0.05f, 0.31f, 0.91f);
     }
 
     // Update is called once per frame

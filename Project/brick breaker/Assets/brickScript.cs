@@ -64,39 +64,39 @@ public class brickScript : MonoBehaviour
         {
             case brickType.stoneBrick:
                 health = 3;
-                sprites = Resources.LoadAll<Sprite>("Sprites/stoneBrick");
+                sprites = Resources.LoadAll<Sprite>("Visual/Sprites/stoneBrick");
                 break;
             case brickType.mossStoneBrick:
                 health = 3;
-                sprites = Resources.LoadAll<Sprite>("Sprites/mossStoneBrick");
+                sprites = Resources.LoadAll<Sprite>("Visual/Sprites/mossStoneBrick");
                 break;
             case brickType.sandBrick:
                 health = 2;
-                sprites = Resources.LoadAll<Sprite>("Sprites/sandBrick");
+                sprites = Resources.LoadAll<Sprite>("Visual/Sprites/SandBrick");
                 break;
             case brickType.mossSandBrick:
                 health = 2;
-                sprites = Resources.LoadAll<Sprite>("Sprites/mossSandBrick");
+                sprites = Resources.LoadAll<Sprite>("Visual/Sprites/mossSandBrick");
                 break;
             case brickType.snowBrick:
                 health = 2;
-                sprites = Resources.LoadAll<Sprite>("Sprites/snowBrick");
+                sprites = Resources.LoadAll<Sprite>("Visual/Sprites/snowBrick");
                 break;
             case brickType.iceBrick:
                 health = 3;
-                sprites = Resources.LoadAll<Sprite>("Sprites/iceBrick");
+                sprites = Resources.LoadAll<Sprite>("Visual/Sprites/iceBrick");
                 break;
             case brickType.metalBrick:
                 health = 4;
-                sprites = Resources.LoadAll<Sprite>("Sprites/metalBrick");
+                sprites = Resources.LoadAll<Sprite>("Visual/Sprites/metalBrick");
                 break;
             case brickType.goldBrick:
                 health = 4;
-                sprites = Resources.LoadAll<Sprite>("Sprites/goldBrick");
+                sprites = Resources.LoadAll<Sprite>("Visual/Sprites/goldBrick");
                 break;
             default:
                 health = 1;
-                sprites = Resources.LoadAll<Sprite>("Sprites/stoneBrick");
+                sprites = Resources.LoadAll<Sprite>("Visual/Sprites/stoneBrick");
 
                 break;
         }
