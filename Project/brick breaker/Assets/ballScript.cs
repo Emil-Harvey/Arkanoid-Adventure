@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BallType { grey, gold, ice, fire, green, dark, bubble, beach, football, tennis }
+
 public class ballScript : MonoBehaviour
 {
+    public BallType type;
+
     public int xDir;
     public int yDir;
     public static int lives = 3;
@@ -18,12 +22,17 @@ public class ballScript : MonoBehaviour
 
     public static int score = 0;
 
+    AudioSource audio;
+    public AudioClip impactSfx;
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         
         Debug.Log("collided with: "+ collision.gameObject.name + " (" + xDir + ", " + yDir+")");
-       
+
+        audio.PlayOneShot(impactSfx);
+
         if (xyCollide.IsTouching(collision.collider)) {//   bounce
            yDir = -yDir;
            xDir = -xDir;
@@ -46,6 +55,7 @@ public class ballScript : MonoBehaviour
     void Start()
     {
         lives = 3;
+        audio = GetComponent<AudioSource>();
         Reset();
     }
 
@@ -66,7 +76,7 @@ public class ballScript : MonoBehaviour
 
             gameObject.transform.position = paddleXYZ;// follow paddle
 
-            //wait for input
+            /// wait for input
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
             {
                 isFree = true;
@@ -80,7 +90,10 @@ public class ballScript : MonoBehaviour
         {//below paddle
             //  out of bounds
             lives -= 1;
+
             Reset();
+
+            ///audio.PlayOneShot();
             //Debug.Log("lives " + lives);
 
 

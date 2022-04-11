@@ -7,7 +7,7 @@ enum winLose { won,playing,lost};
 
 public class GUItext : MonoBehaviour
 {
-    public Text scoreText;
+    public TMPro.TextMeshProUGUI scoreText;
     public GameObject UIpanel;
 
     private winLose gameState;
@@ -61,10 +61,10 @@ public class GUItext : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        scoreText = UIpanel.transform.Find("scoreText").GetComponent<TMPro.TextMeshProUGUI>();
         gameState = winLose.playing;
         scoreText.text = "SCORE\t" + ballScript.score + " LIVES  " + ballScript.lives;
-        scoreText.color = new Color(0.05f, 0.31f, 0.91f);
+        scoreText.color = new Color(1f, 1f, 1f);
     }
 
     // Update is called once per frame

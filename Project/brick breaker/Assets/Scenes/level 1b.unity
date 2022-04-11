@@ -557,6 +557,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e7c7d72d6c74e36bc832beaabf7631, type: 3}
+--- !u!21 &356375392
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Hidden/CRTShader
+  m_Shader: {fileID: 4800000, guid: f0660fafb078f90429e66eb658a23c4c, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Floats:
+    - hardPix: -2
+    - hardScan: -8
+    - maskDark: 0.5
+    - maskLight: 1.65
+    - resScale: 2
+    m_Colors:
+    - warp: {r: 0.0125, g: 0.0166, b: 0, a: 0}
 --- !u!1001 &401506866
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3650,6 +3677,11 @@ PrefabInstance:
     - target: {fileID: 2975296647162465894, guid: 571ac6233bf3e4fea890fa890c341346,
         type: 3}
       propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2975296647162465894, guid: 571ac6233bf3e4fea890fa890c341346,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3171057686197959223, guid: 571ac6233bf3e4fea890fa890c341346,

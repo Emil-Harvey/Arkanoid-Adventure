@@ -591,7 +591,7 @@ GameObject:
   - component: {fileID: 902234329}
   - component: {fileID: 902234328}
   m_Layer: 5
-  m_Name: 1a (2)
+  m_Name: 1c
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1145,7 +1145,7 @@ GameObject:
   - component: {fileID: 1226585098}
   - component: {fileID: 1226585097}
   m_Layer: 5
-  m_Name: 1a (1)
+  m_Name: 1b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1550,6 +1550,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1722040635}
   m_CullTransparentMesh: 0
+--- !u!21 &1737296945
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Hidden/CRTShader
+  m_Shader: {fileID: 4800000, guid: f0660fafb078f90429e66eb658a23c4c, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Floats:
+    - hardPix: -2
+    - hardScan: -8
+    - maskDark: 0.5
+    - maskLight: 1.65
+    - resScale: 2
+    m_Colors:
+    - warp: {r: 0.0125, g: 0.0166, b: 0, a: 0}
 --- !u!1 &1752632497
 GameObject:
   m_ObjectHideFlags: 0
@@ -1969,7 +1996,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 7b0d832b9023e5f489e716163c8d055b, type: 3}
-    m_FontSize: 1
+    m_FontSize: 2
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -1978,7 +2005,7 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: level 3c
 --- !u!222 &1877539966
@@ -2155,6 +2182,7 @@ GameObject:
   - component: {fileID: 2046781918}
   - component: {fileID: 2046781917}
   - component: {fileID: 2046781920}
+  - component: {fileID: 2046781921}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2197,7 +2225,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 15
+  orthographic size: 12.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2247,6 +2275,19 @@ MonoBehaviour:
   m_CropFrameX: 1
   m_CropFrameY: 1
   m_StretchFill: 0
+--- !u!114 &2046781921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046781916}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbb66f3ec34e38c428a1946effa8271c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 1737296945}
 --- !u!1 &2103165791
 GameObject:
   m_ObjectHideFlags: 0
