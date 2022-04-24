@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1bbaf0d3ee6b4d1495de3e7e9ca9d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   xDir: 0
   yDir: 0
   paddle: {fileID: 8050549333247413634, guid: 4f5fa2c72c78b40fd98f603138ee158b, type: 3}
@@ -208,7 +209,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.66
   m_Pitch: 1
   Loop: 0
   Mute: 0

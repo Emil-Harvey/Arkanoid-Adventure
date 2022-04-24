@@ -19,6 +19,9 @@ public class brickScript : MonoBehaviour
     //private SpriteAtlas atlas;
     //public GameObject ball;
     //public 
+    AudioSource audio;
+    public AudioClip impactSfx;
+    public AudioClip destroySfx;
 
     private void OnCollisionExit2D(Collision2D collision)
     {
@@ -35,17 +38,21 @@ public class brickScript : MonoBehaviour
         {
             case 3:
                 sr.sprite = fullHealthSprite;
+                audio.PlayOneShot(impactSfx);
                 break;
 
             case 2:
                 sr.sprite = midHealthSprite;
+                audio.PlayOneShot(impactSfx);
                 break;
 
             case 1:
                 sr.sprite = lowHealthSprite;
+                audio.PlayOneShot(destroySfx);
                 break;
 
             default:
+                //audio.PlayOneShot(destroySfx); it's too late..
                 Destroy(gameObject);//no lives, gone
                 break;
         }
@@ -106,10 +113,9 @@ public class brickScript : MonoBehaviour
         midHealthSprite = sprites[sprites.Length - 2];
         fullHealthSprite = sprites[0];//consistent
 
-
-
         sr.sprite = fullHealthSprite;
 
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

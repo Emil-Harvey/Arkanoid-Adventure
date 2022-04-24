@@ -12,12 +12,16 @@ public class GUItext : MonoBehaviour
 
     private winLose gameState;
 
+    AudioSource audio;
+    public AudioClip winSfx;
+    public AudioClip failSfx;
+
     void CheckWin() 
     {
 
         GameObject[] allObjects = GameObject.FindGameObjectsWithTag("perish");
 
-        if(allObjects.Length < 3)
+        if(allObjects.Length < 3 || Input.GetKeyDown(KeyCode.BackQuote))
         {// all bricks broken
 
             UIpanel.transform.position = new Vector3(0, 0, 0);
@@ -29,6 +33,11 @@ public class GUItext : MonoBehaviour
 
             gameState = winLose.won;
 
+            var bgMusic = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
+            bgMusic.mute = true;//.Stop(); // stop bg music
+            bgMusic.Pause(); // stop bg music
+            bgMusic.Stop(); // stop bg music
+            audio.PlayOneShot(winSfx);
         }
 
     }
@@ -65,6 +74,8 @@ public class GUItext : MonoBehaviour
         gameState = winLose.playing;
         scoreText.text = "SCORE\t" + ballScript.score + " LIVES  " + ballScript.lives;
         scoreText.color = new Color(1f, 1f, 1f);
+
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

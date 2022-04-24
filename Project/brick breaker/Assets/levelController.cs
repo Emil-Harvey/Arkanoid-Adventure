@@ -9,7 +9,7 @@ public class levelController : MonoBehaviour
     //[SerializeField]
     //private levelNumber levelSet;
 
-    // called by the UI buttons
+    /// called by the UI buttons
     public void SetLevel(int level)
     {
         Application.LoadLevel(level);

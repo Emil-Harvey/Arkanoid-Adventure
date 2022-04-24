@@ -51,7 +51,7 @@ public class ballScript : MonoBehaviour
         isFree = false;
     }
 
-    // Start is called before the first frame update
+    /// Start is called before the first frame update
     void Start()
     {
         lives = 3;
@@ -59,7 +59,7 @@ public class ballScript : MonoBehaviour
         Reset();
     }
 
-    // Update is called once per frame
+    /// Update is called once per frame
     void Update()
     {
         //Debug.Log("score " + score);
@@ -74,7 +74,8 @@ public class ballScript : MonoBehaviour
             //Debug.Log(GameObject.Find("paddle").transform.position.x);
             //Debug.Log(paddleXYZ);
 
-            gameObject.transform.position = paddleXYZ;// follow paddle
+            /// follow paddle
+            gameObject.transform.position = paddleXYZ;
 
             /// wait for input
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
@@ -87,13 +88,13 @@ public class ballScript : MonoBehaviour
 
 
         if (gameObject.transform.position.y < -7 || Input.GetMouseButtonDown(1))//  user can right click to reset if stuck, sacrifice a life
-        {//below paddle
+        {/// below paddle
             //  out of bounds
             lives -= 1;
 
             Reset();
 
-            ///audio.PlayOneShot();
+            //audio.PlayOneShot();
             //Debug.Log("lives " + lives);
 
 
