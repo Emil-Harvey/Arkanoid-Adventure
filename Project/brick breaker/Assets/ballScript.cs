@@ -24,7 +24,7 @@ public class ballScript : MonoBehaviour
 
     AudioSource audio;
     public AudioClip impactSfx;
-
+    public AudioClip dieSfx;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -94,7 +94,7 @@ public class ballScript : MonoBehaviour
 
             Reset();
 
-            //audio.PlayOneShot();
+            audio.PlayOneShot(dieSfx);
             //Debug.Log("lives " + lives);
 
 

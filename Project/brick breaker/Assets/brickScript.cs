@@ -48,11 +48,12 @@ public class brickScript : MonoBehaviour
 
             case 1:
                 sr.sprite = lowHealthSprite;
-                audio.PlayOneShot(destroySfx);
+                audio.PlayOneShot(impactSfx);
                 break;
 
             default:
-                //audio.PlayOneShot(destroySfx); it's too late..
+                AudioSource globalAudio = GameObject.FindGameObjectWithTag("global_audio").GetComponent<AudioSource>();
+                globalAudio.PlayOneShot(destroySfx); 
                 Destroy(gameObject);//no lives, gone
                 break;
         }

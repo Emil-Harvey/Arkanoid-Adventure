@@ -93,7 +93,7 @@ MonoBehaviour:
   scoreText: {fileID: 2710129432152464275}
   UIpanel: {fileID: 2385138155551617365}
   winSfx: {fileID: 8300000, guid: 767aa4054bac91543a930247cea7c6f1, type: 3}
-  failSfx: {fileID: 0}
+  failSfx: {fileID: 8300000, guid: 7f137a12af6e8484ea4eef83c922fa55, type: 3}
 --- !u!114 &6764451163383290693
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -127,8 +127,8 @@ MonoBehaviour:
   sprites: []
   sr: {fileID: 0}
   currentType: 0
-  impactSfx: {fileID: 8300000, guid: c686142500ecb194788a656ffe08ff74, type: 3}
-  destroySfx: {fileID: 8300000, guid: cdba6e751cdb8814481ed80f5ec812c9, type: 3}
+  impactSfx: {fileID: 8300000, guid: 022a38c5990ce9945b20f0ed4f6cc236, type: 3}
+  destroySfx: {fileID: 8300000, guid: ad5a50ddc2f1e1148980b2c9176d3772, type: 3}
 --- !u!50 &4436755577067324017
 Rigidbody2D:
   serializedVersion: 4

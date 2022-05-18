@@ -106,7 +106,8 @@ MonoBehaviour:
   xCollide: {fileID: 3440228202285737400}
   yCollide: {fileID: 2628965253366925479}
   xyCollide: {fileID: 696077662688063183}
-  impactSfx: {fileID: 8300000, guid: 022a38c5990ce9945b20f0ed4f6cc236, type: 3}
+  impactSfx: {fileID: 8300000, guid: cc2b90bf249619e42b2bd1d9289e11fb, type: 3}
+  dieSfx: {fileID: 8300000, guid: 0e38c7696196de540af5a9167a32c991, type: 3}
 --- !u!50 &4571827407197707088
 Rigidbody2D:
   serializedVersion: 4
