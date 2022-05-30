@@ -10,7 +10,7 @@ public class ballScript : MonoBehaviour
 
     public int xDir;
     public int yDir;
-    public static int lives = 3;
+    
     public GameObject paddle;
     public BoxCollider2D xCollide;
     public BoxCollider2D yCollide;
@@ -19,8 +19,6 @@ public class ballScript : MonoBehaviour
     private Vector3 paddleXYZ;
 
     int speed = 3;
-
-    public static int score = 0;
 
     AudioSource audio;
     public AudioClip impactSfx;
@@ -31,17 +29,29 @@ public class ballScript : MonoBehaviour
         
         Debug.Log("collided with: "+ collision.gameObject.name + " (" + xDir + ", " + yDir+")");
 
-        audio.PlayOneShot(impactSfx);
+        bool paddleCaught = ( collision.gameObject.name == "paddle" && (Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space)) );
 
-        if (xyCollide.IsTouching(collision.collider)) {//   bounce
-           yDir = -yDir;
-           xDir = -xDir;
+        if (!paddleCaught)
+        {
+
+            audio.PlayOneShot(impactSfx);
+
+            if (xyCollide.IsTouching(collision.collider))
+            {//   bounce
+                yDir = -yDir;
+                xDir = -xDir;
+            }
+            else if (xCollide.IsTouching(collision.collider)) { xDir = -xDir; }
+            else if (yCollide.IsTouching(collision.collider)) { yDir = -yDir; }
+
+            gameObject.transform.Translate(xDir * 0.12f, yDir * 0.12f, 0.0f);//exit collision
+            //Debug.Log("new dir: (" + xDir + ", " + yDir + ")");
         }
-        else if (xCollide.IsTouching(collision.collider)) { xDir = -xDir; }
-        else if (yCollide.IsTouching(collision.collider)) { yDir = -yDir; }
-
-        gameObject.transform.Translate(xDir * 0.12f, yDir * 0.12f, 0.0f);//exit collision
-        Debug.Log("new dir: (" + xDir + ", " + yDir + ")");
+        else
+        {
+            isFree = false;
+            Debug.Log("caught");
+        }
     }
 
     private void Reset()
@@ -54,7 +64,7 @@ public class ballScript : MonoBehaviour
     /// Start is called before the first frame update
     void Start()
     {
-        lives = 3;
+        paddleScript.lives = 3;
         audio = GetComponent<AudioSource>();
         Reset();
     }
@@ -62,10 +72,15 @@ public class ballScript : MonoBehaviour
     /// Update is called once per frame
     void Update()
     {
+        
         //Debug.Log("score " + score);
         if (isFree)
         {
             gameObject.transform.Translate(xDir * speed * Time.deltaTime , yDir * speed * Time.deltaTime, 0.0f);
+
+
+            if (speed < 10)
+                speed = (int)(30 / GameObject.FindGameObjectsWithTag("perish").Length) + 3;
         }
         else
         {
@@ -78,7 +93,7 @@ public class ballScript : MonoBehaviour
             gameObject.transform.position = paddleXYZ;
 
             /// wait for input
-            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Space))
             {
                 isFree = true;
                 yDir = 1;
@@ -90,14 +105,14 @@ public class ballScript : MonoBehaviour
         if (gameObject.transform.position.y < -7 || Input.GetMouseButtonDown(1))//  user can right click to reset if stuck, sacrifice a life
         {/// below paddle
             //  out of bounds
-            lives -= 1;
-
-            Reset();
 
             audio.PlayOneShot(dieSfx);
+
+            /// if no more balls
+            paddleScript.lives -= 1;
+            Reset();
             //Debug.Log("lives " + lives);
-
-
+            /// else: Destroy(gameObject);
         }
     }
 

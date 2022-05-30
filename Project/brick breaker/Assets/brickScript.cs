@@ -32,8 +32,8 @@ public class brickScript : MonoBehaviour
             Debug.Log("score " + ballScript.score);
         }*/
         health -= 1;
-        ballScript.score += 100;
-        Debug.Log("score " + ballScript.score);
+        paddleScript.score += 10;
+        
         switch (health)
         {
             case 3:
@@ -53,7 +53,11 @@ public class brickScript : MonoBehaviour
 
             default:
                 AudioSource globalAudio = GameObject.FindGameObjectWithTag("global_audio").GetComponent<AudioSource>();
-                globalAudio.PlayOneShot(destroySfx); 
+                globalAudio.PlayOneShot(destroySfx);
+
+                paddleScript.score += 90; // 100pts total for destroying
+                Debug.Log("score " + paddleScript.score);
+
                 Destroy(gameObject);//no lives, gone
                 break;
         }

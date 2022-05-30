@@ -5,8 +5,11 @@ using UnityEngine;
 public class paddleScript : MonoBehaviour
 {
     public float speed;
-    private float areaWidth = 13.485f;
-    // Start is called before the first frame update
+    private float areaWidth = 13.485f;// barrier collision
+    public static int lives = 3;
+
+    public static int score = 0;
+
     void Start()
     {
         gameObject.transform.position = new Vector3(0.0f, -6.0f, 0.0f);// set start pos

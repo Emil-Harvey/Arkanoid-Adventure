@@ -188,7 +188,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4571827407197707095}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -206,7 +206,7 @@ AudioSource:
   m_GameObject: {fileID: 4571827407197707095}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 0b091c883ff1d684c89aa664cad848bc,
+  OutputAudioMixerGroup: {fileID: -609527979317216397, guid: 0b091c883ff1d684c89aa664cad848bc,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0

@@ -15,7 +15,7 @@ public class GUItext : MonoBehaviour
     AudioSource audio;
     public AudioClip winSfx;
     public AudioClip failSfx;
-
+    
     void CheckWin() 
     {
 
@@ -28,7 +28,7 @@ public class GUItext : MonoBehaviour
             UIpanel.GetComponent<VerticalLayoutGroup>().padding.bottom = 3;
             scoreText.color = new Color(0.25f, 0.90f, 0.1f);
             scoreText.text = "Well Done! level complete" +
-                "SCORE  " + ballScript.score +
+                "SCORE  " + paddleScript.score +
                 "\npress enter to continue";
 
             gameState = winLose.won;
@@ -43,7 +43,7 @@ public class GUItext : MonoBehaviour
     }
     void CheckLose()
     {
-        if (ballScript.lives < 0 && gameState == winLose.playing)// gaem over
+        if (paddleScript.lives < 0 && gameState == winLose.playing)// gaem over
         {
             Debug.Log("game over");
             scoreText.color = new Color (0.5f,0.0f,0.0f);
@@ -59,11 +59,18 @@ public class GUItext : MonoBehaviour
             UIpanel.GetComponent<VerticalLayoutGroup>().padding.bottom = 3;
 
             scoreText.text = "Game Over " +
-                "SCORE  " + ballScript.score +
+                "SCORE  " + paddleScript.score +
                 "\npress enter to continue";
-            ballScript.score = 0;
+            paddleScript.score = 0;
             gameState = winLose.lost;
-            
+
+
+            var bgMusic = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
+            bgMusic.mute = true;//.Stop(); // stop bg music
+            bgMusic.Pause(); // stop bg music
+            bgMusic.Stop(); // stop bg music
+            audio.PlayOneShot(failSfx);
+
         }
     }
 
@@ -72,18 +79,21 @@ public class GUItext : MonoBehaviour
     {
         scoreText = UIpanel.transform.Find("scoreText").GetComponent<TMPro.TextMeshProUGUI>();
         gameState = winLose.playing;
-        scoreText.text = "SCORE\t" + ballScript.score + " LIVES  " + ballScript.lives;
+        scoreText.text = "SCORE\t" + paddleScript.score + " LIVES  " + paddleScript.lives;
         scoreText.color = new Color(1f, 1f, 1f);
 
         audio = GetComponent<AudioSource>();
     }
+    
+    
 
     // Update is called once per frame
     void Update()
     {
+
         if (gameState == winLose.playing)
         {
-            scoreText.text = "SCORE  " + ballScript.score + " LIVES  " + ballScript.lives;
+            scoreText.text = "SCORE  " + paddleScript.score + " LIVES  " + paddleScript.lives;
             CheckWin();
             CheckLose();
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -96,5 +106,6 @@ public class GUItext : MonoBehaviour
         {
             Application.LoadLevel(0);
         }
+
     }
 }
