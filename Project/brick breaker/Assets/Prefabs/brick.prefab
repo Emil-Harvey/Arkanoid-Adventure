@@ -124,9 +124,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63e4498912d274bd6837ea5f410bc2fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprites: []
   sr: {fileID: 0}
+  sprites: []
   currentType: 0
+  damageEffectOverlay: {fileID: 7338749055687786448, guid: 75c2f726cefdab74b9e5ace2ce81881f,
+    type: 3}
   impactSfx: {fileID: 8300000, guid: 022a38c5990ce9945b20f0ed4f6cc236, type: 3}
   destroySfx: {fileID: 8300000, guid: ad5a50ddc2f1e1148980b2c9176d3772, type: 3}
 --- !u!50 &4436755577067324017

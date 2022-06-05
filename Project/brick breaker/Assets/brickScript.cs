@@ -4,17 +4,21 @@ using UnityEngine;
 using UnityEngine.U2D;
 
 enum brickType { stoneBrick, mossStoneBrick, sandBrick, mossSandBrick, snowBrick, iceBrick, metalBrick, goldBrick }
+struct flag { public bool b1, b2; }
 
 public class brickScript : MonoBehaviour
 {
-    public Sprite[] sprites;
-    private Sprite fullHealthSprite;
-    private Sprite midHealthSprite;
-    private Sprite lowHealthSprite;
     public SpriteRenderer sr;
-    private int health;
-    [SerializeField]
-    private brickType currentType;
+    public Sprite[] sprites;
+    Sprite fullHealthSprite;
+    Sprite midHealthSprite;
+    Sprite lowHealthSprite;
+
+    int health;
+    [SerializeField] brickType currentType;
+    [SerializeField] GameObject damageEffectOverlay;
+    float damageEffectTimer = 0.0f;
+
     //[SerializeField]
     //private SpriteAtlas atlas;
     //public GameObject ball;
@@ -23,35 +27,29 @@ public class brickScript : MonoBehaviour
     public AudioClip impactSfx;
     public AudioClip destroySfx;
 
-    private void OnCollisionExit2D(Collision2D collision)
+    flag effects; //= { false, false };
+
+    void takeDamage()
     {
-        /*if (collision.gameObject == ball)
-        {
-            health -= 1;
-            ballScript.score += 100;
-            Debug.Log("score " + ballScript.score);
-        }*/
         health -= 1;
         paddleScript.score += 10;
-        
+
         switch (health)
         {
             case 3:
                 sr.sprite = fullHealthSprite;
-                audio.PlayOneShot(impactSfx);
                 break;
 
             case 2:
                 sr.sprite = midHealthSprite;
-                audio.PlayOneShot(impactSfx);
                 break;
 
             case 1:
-                sr.sprite = lowHealthSprite;
-                audio.PlayOneShot(impactSfx);
+                sr.sprite = lowHealthSprite;               
                 break;
 
             default:
+                // get global audio and play death sound from it so that I can be destroyed easily
                 AudioSource globalAudio = GameObject.FindGameObjectWithTag("global_audio").GetComponent<AudioSource>();
                 globalAudio.PlayOneShot(destroySfx);
 
@@ -61,6 +59,33 @@ public class brickScript : MonoBehaviour
                 Destroy(gameObject);//no lives, gone
                 break;
         }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<ballScript>() != null && !effects.b1){
+            
+            var this_ball = collision.gameObject.GetComponent<ballScript>();
+            if (this_ball.type == BallType.green){
+                effects.b1 = true;
+                effects.b2 = true;// apply acid effect
+                var effectOverlay = Instantiate(damageEffectOverlay,
+                    transform.position +new Vector3(0,0,-0.1f), Quaternion.identity);// create acid sprite 'on top of' self
+                effectOverlay.transform.parent = this.transform;
+                Debug.Log("ACID EFFECT created!!");
+            }
+            if (this_ball.type == BallType.fire) {
+                effects.b1 = true;
+                effects.b2 = false;// apply 'fire' effect
+                var effectOverlay = Instantiate(damageEffectOverlay, 
+                    transform.position +new Vector3(0,0,-0.1f), Quaternion.identity);// create acid sprite 'on top of' self
+                effectOverlay.transform.parent = this.transform;
+            }
+            else {  }
+        }
+        /*{health -= 1;ballScript.score += 100; Debug.Log("score " + ballScript.score);}*/
+        
+        audio.PlayOneShot(impactSfx);
+        takeDamage();
 
         //if (health < 1) {  }//gone
     }
@@ -121,13 +146,24 @@ public class brickScript : MonoBehaviour
         sr.sprite = fullHealthSprite;
 
         audio = GetComponent<AudioSource>();
+
+        effects.b1 = false;// b1 tells if an effect is active or not.
+        effects.b2 = false;// b2 indicates if the effect is acid or fire
     }
 
     // Update is called once per frame
     void Update()
     {
+        ///half timer = 0;
         //Debug.Log(health);
-
+        if (effects.b1)
+        {
+            damageEffectTimer += 1;
+            if (damageEffectTimer > 250){
+                takeDamage();
+                damageEffectTimer = 0;
+            }//*/
+        }
 
     }
 

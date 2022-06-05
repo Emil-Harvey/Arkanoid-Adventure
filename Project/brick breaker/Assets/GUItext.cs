@@ -27,9 +27,9 @@ public class GUItext : MonoBehaviour
             UIpanel.transform.position = new Vector3(0, 0, 0);
             UIpanel.GetComponent<VerticalLayoutGroup>().padding.bottom = 3;
             scoreText.color = new Color(0.25f, 0.90f, 0.1f);
-            scoreText.text = "Well Done! level complete" +
-                "SCORE  " + paddleScript.score +
-                "\npress enter to continue";
+            scoreText.text = " Well Done! level complete \n" +
+                " SCORE  " + paddleScript.score +
+                "\n press enter to continue ";
 
             gameState = winLose.won;
 
@@ -58,9 +58,9 @@ public class GUItext : MonoBehaviour
             UIpanel.transform.position = new Vector3(0, 0, 0);
             UIpanel.GetComponent<VerticalLayoutGroup>().padding.bottom = 3;
 
-            scoreText.text = "Game Over " +
-                "SCORE  " + paddleScript.score +
-                "\npress enter to continue";
+            scoreText.text = "Game Over \n" +
+                " SCORE  " + paddleScript.score +
+                "\n press enter to continue";
             paddleScript.score = 0;
             gameState = winLose.lost;
 
