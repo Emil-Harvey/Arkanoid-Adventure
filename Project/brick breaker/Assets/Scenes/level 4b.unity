@@ -1181,6 +1181,17 @@ PrefabInstance:
       propertyPath: currentType
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4436755577067324016, guid: 83e7c7d72d6c74e36bc832beaabf7631,
+        type: 3}
+      propertyPath: powerupType
+      value: 
+      objectReference: {fileID: 8679344466017160958, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+    - target: {fileID: 4436755577067324016, guid: 83e7c7d72d6c74e36bc832beaabf7631,
+        type: 3}
+      propertyPath: isPowerup
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4436755577067324020, guid: 83e7c7d72d6c74e36bc832beaabf7631,
         type: 3}
       propertyPath: m_Name
@@ -1542,6 +1553,17 @@ PrefabInstance:
       propertyPath: currentType
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 4436755577067324016, guid: 83e7c7d72d6c74e36bc832beaabf7631,
+        type: 3}
+      propertyPath: isPowerup
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436755577067324016, guid: 83e7c7d72d6c74e36bc832beaabf7631,
+        type: 3}
+      propertyPath: powerupType
+      value: 
+      objectReference: {fileID: 1791365480822039450, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
     - target: {fileID: 4436755577067324020, guid: 83e7c7d72d6c74e36bc832beaabf7631,
         type: 3}
       propertyPath: m_Name
@@ -4039,3 +4061,72 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: cfe4d5de4d763b741ae18b9b61eafe32, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0bb9580e9e5547b39cdaacfafe5dd45, type: 3}
+--- !u!1001 &8679344466176490516
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8679344466017160952, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.094835356
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160952, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.0433152
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160952, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.4461966
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160952, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160952, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160952, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160952, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160952, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160952, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160952, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160952, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160958, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_Name
+      value: powerup orb
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52, type: 3}

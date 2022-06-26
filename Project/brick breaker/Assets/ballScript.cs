@@ -27,7 +27,7 @@ public class ballScript : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         
-        Debug.Log("collided with: "+ collision.gameObject.name + " (" + xDir + ", " + yDir+")");
+        //Debug.Log("collided with: "+ collision.gameObject.name + " (" + xDir + ", " + yDir+")");
 
         bool paddleCaught = ( collision.gameObject.name == "paddle" && (Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space)) );
 

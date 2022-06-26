@@ -129,6 +129,10 @@ MonoBehaviour:
   currentType: 0
   damageEffectOverlay: {fileID: 7338749055687786448, guid: 75c2f726cefdab74b9e5ace2ce81881f,
     type: 3}
+  isPowerup: 0
+  powerupOverlay: {fileID: 2721734346403934878, guid: dd98a06b3082ece46ae52eaec9b817eb,
+    type: 3}
+  powerupType: {fileID: 0}
   impactSfx: {fileID: 8300000, guid: 022a38c5990ce9945b20f0ed4f6cc236, type: 3}
   destroySfx: {fileID: 8300000, guid: ad5a50ddc2f1e1148980b2c9176d3772, type: 3}
 --- !u!50 &4436755577067324017

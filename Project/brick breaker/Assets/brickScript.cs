@@ -19,6 +19,10 @@ public class brickScript : MonoBehaviour
     [SerializeField] GameObject damageEffectOverlay;
     float damageEffectTimer = 0.0f;
 
+    public bool isPowerup = false;
+    [SerializeField] GameObject powerupOverlay;
+    public GameObject powerupType;
+
     //[SerializeField]
     //private SpriteAtlas atlas;
     //public GameObject ball;
@@ -56,6 +60,9 @@ public class brickScript : MonoBehaviour
                 paddleScript.score += 90; // 100pts total for destroying
                 Debug.Log("score " + paddleScript.score);
 
+                if (isPowerup)
+                    Instantiate(powerupType, transform.position, Quaternion.identity);
+
                 Destroy(gameObject);//no lives, gone
                 break;
         }
@@ -71,7 +78,7 @@ public class brickScript : MonoBehaviour
                 var effectOverlay = Instantiate(damageEffectOverlay,
                     transform.position +new Vector3(0,0,-0.1f), Quaternion.identity);// create acid sprite 'on top of' self
                 effectOverlay.transform.parent = this.transform;
-                Debug.Log("ACID EFFECT created!!");
+               // Debug.Log("ACID EFFECT created!!");
             }
             if (this_ball.type == BallType.fire) {
                 effects.b1 = true;
@@ -149,6 +156,13 @@ public class brickScript : MonoBehaviour
 
         effects.b1 = false;// b1 tells if an effect is active or not.
         effects.b2 = false;// b2 indicates if the effect is acid or fire
+
+        if (isPowerup)
+        {
+            var powerupSpriteOverlay = Instantiate(powerupOverlay,
+                    transform.position + new Vector3(0, 0, -0.08f), Quaternion.identity);// create led sprite 'on top of' self
+            powerupSpriteOverlay.transform.parent = this.transform;
+        }
     }
 
     // Update is called once per frame
