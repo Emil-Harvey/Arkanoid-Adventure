@@ -61,3 +61,4 @@ crashlytics-build.properties
 # unnecessary folders 0123456987
 /brick breaker/Temp/
 /brick breaker/Library/
+*.zip
