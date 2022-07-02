@@ -24,6 +24,8 @@ public class ballScript : MonoBehaviour
     public AudioClip impactSfx;
     public AudioClip dieSfx;
 
+
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         
@@ -66,6 +68,8 @@ public class ballScript : MonoBehaviour
     {
         paddleScript.lives = 3;
         audio = GetComponent<AudioSource>();
+        GetComponent<SpriteRenderer>().sprite = Resources.LoadAll<Sprite>("Visual/Sprites/ball")[(int)type];
+
         Reset();
     }
 
@@ -81,6 +85,7 @@ public class ballScript : MonoBehaviour
 
             if (speed < 10)
                 speed = (int)(30 / GameObject.FindGameObjectsWithTag("perish").Length) + 3;
+            // speed can only be between 3 & 10.
         }
         else
         {
@@ -114,8 +119,26 @@ public class ballScript : MonoBehaviour
             //Debug.Log("lives " + lives);
             /// else: Destroy(gameObject);
         }
+
+        
+       
     }
-
+    public void ChangeType(BallType newType)
+    {
+        type = newType;
+        /*switch (type) // after writing this it turns out that the way to change the sprite is the same code in every case.
+        {
+            case BallType.green:
+                //GetComponent<SpriteRenderer>().sprite = Resources.LoadAll<Sprite>("Visual/Sprites/ball")[(int)type];
+                break;
+            case BallType.fire:
+                break;
+            case BallType.ice:
+                break;
+            default:
+                break;
+        }*/
+        GetComponent<SpriteRenderer>().sprite = Resources.LoadAll<Sprite>("Visual/Sprites/ball")[(int)type];
+    }
 }
-
 ;

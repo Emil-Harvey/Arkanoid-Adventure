@@ -6,9 +6,30 @@ public class paddleScript : MonoBehaviour
 {
     public float speed;
     private float areaWidth = 13.485f;// barrier collision
+    //private float paddleWidth
+
     public static int lives = 3;
 
     public static int score = 0;
+
+    public void OnPowerupGet(PowerupType type, float value = 0)
+    {
+        var ball = FindObjectOfType<ballScript>(); // doesn't seem to work in multiple cases? inefficient if ball not needed
+        switch (type)
+        {
+            case PowerupType.ACID:
+                //var ball
+                ball.ChangeType(BallType.green);
+                break;
+            case PowerupType.FIRE:
+                //var ball = FindObjectOfType<ballScript>(); unnecessary assignment?
+                ball.ChangeType(BallType.green);
+                break;
+            default:
+                Debug.Log("bugged powerup recieved (?)");
+                break;
+        }
+    }
 
     void Start()
     {
@@ -33,4 +54,5 @@ public class paddleScript : MonoBehaviour
 
 
     }
+    
 }

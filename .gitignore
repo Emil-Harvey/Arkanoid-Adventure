@@ -62,3 +62,4 @@ crashlytics-build.properties
 /brick breaker/Temp/
 /brick breaker/Library/
 *.zip
+Project/brick breaker/WebGL Build/*

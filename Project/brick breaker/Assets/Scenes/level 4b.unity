@@ -1562,7 +1562,7 @@ PrefabInstance:
         type: 3}
       propertyPath: powerupType
       value: 
-      objectReference: {fileID: 1791365480822039450, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+      objectReference: {fileID: 8679344466017160958, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
         type: 3}
     - target: {fileID: 4436755577067324020, guid: 83e7c7d72d6c74e36bc832beaabf7631,
         type: 3}
@@ -3922,13 +3922,13 @@ PrefabInstance:
     - target: {fileID: 4571827407197707091, guid: 7d241292bff5e4716973d5fdd6921eb8,
         type: 3}
       propertyPath: type
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4571827407197707093, guid: 7d241292bff5e4716973d5fdd6921eb8,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300008, guid: 80b0647adb2804281afad502381097f6,
+      objectReference: {fileID: 21300000, guid: 80b0647adb2804281afad502381097f6,
         type: 3}
     - target: {fileID: 4571827407197707095, guid: 7d241292bff5e4716973d5fdd6921eb8,
         type: 3}

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 enum winLose { won,playing,lost};
@@ -25,7 +26,7 @@ public class GUItext : MonoBehaviour
         {// all bricks broken
 
             UIpanel.transform.position = new Vector3(0, 0, 0);
-            UIpanel.GetComponent<VerticalLayoutGroup>().padding.bottom = 3;
+            UIpanel.GetComponent<RectTransform>().sizeDelta = new Vector2(24, 4.8f);//UIpanel.GetComponent<VerticalLayoutGroup>().padding.bottom = 3;
             scoreText.color = new Color(0.25f, 0.90f, 0.1f);
             scoreText.text = " Well Done! level complete \n" +
                 " SCORE  " + paddleScript.score +
@@ -56,11 +57,11 @@ public class GUItext : MonoBehaviour
             //  show end screen
 
             UIpanel.transform.position = new Vector3(0, 0, 0);
-            UIpanel.GetComponent<VerticalLayoutGroup>().padding.bottom = 3;
+            UIpanel.GetComponent<RectTransform>().sizeDelta = new Vector2(24, 4.8f);//<VerticalLayoutGroup>().padding.bottom = 3;
 
-            scoreText.text = "Game Over \n" +
-                " SCORE  " + paddleScript.score +
-                "\n press enter to continue";
+            scoreText.text = " Game Over \n" +
+                " SCORE " + paddleScript.score +
+                "\n press enter to continue ";
             paddleScript.score = 0;
             gameState = winLose.lost;
 
@@ -96,15 +97,16 @@ public class GUItext : MonoBehaviour
             scoreText.text = "SCORE  " + paddleScript.score + " LIVES  " + paddleScript.lives;
             CheckWin();
             CheckLose();
+
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Application.LoadLevel(0);
+                SceneManager.LoadScene(0);//Application.LoadLevel(0);
             }
 
         }
         else if(Input.GetKeyDown(KeyCode.Return))// game is over, enter to return to menu
         {
-            Application.LoadLevel(0);
+            SceneManager.LoadScene(0); //Application.LoadLevel(0);
         }
 
     }
