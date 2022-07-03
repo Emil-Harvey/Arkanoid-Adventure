@@ -878,6 +878,11 @@ PrefabInstance:
       propertyPath: currentType
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4436755577067324016, guid: 83e7c7d72d6c74e36bc832beaabf7631,
+        type: 3}
+      propertyPath: isPowerup
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4436755577067324020, guid: 83e7c7d72d6c74e36bc832beaabf7631,
         type: 3}
       propertyPath: m_Name
@@ -4044,6 +4049,11 @@ PrefabInstance:
         type: 3}
       propertyPath: currentType
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436755577067324016, guid: 83e7c7d72d6c74e36bc832beaabf7631,
+        type: 3}
+      propertyPath: isPowerup
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4436755577067324020, guid: 83e7c7d72d6c74e36bc832beaabf7631,
         type: 3}

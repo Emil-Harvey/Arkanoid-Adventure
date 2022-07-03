@@ -127,12 +127,14 @@ MonoBehaviour:
   sr: {fileID: 0}
   sprites: []
   currentType: 0
-  damageEffectOverlay: {fileID: 7338749055687786448, guid: 75c2f726cefdab74b9e5ace2ce81881f,
-    type: 3}
+  damageEffectOverlays:
+  - {fileID: 7338749055687786448, guid: 75c2f726cefdab74b9e5ace2ce81881f, type: 3}
+  - {fileID: 4044371123705183139, guid: fd11e3902b19e7b4280ae3cc60a8fc70, type: 3}
   isPowerup: 0
   powerupOverlay: {fileID: 2721734346403934878, guid: dd98a06b3082ece46ae52eaec9b817eb,
     type: 3}
-  powerupType: {fileID: 0}
+  powerupType: {fileID: 8679344466017160958, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+    type: 3}
   impactSfx: {fileID: 8300000, guid: 022a38c5990ce9945b20f0ed4f6cc236, type: 3}
   destroySfx: {fileID: 8300000, guid: ad5a50ddc2f1e1148980b2c9176d3772, type: 3}
 --- !u!50 &4436755577067324017

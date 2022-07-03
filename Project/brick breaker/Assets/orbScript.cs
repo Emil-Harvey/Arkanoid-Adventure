@@ -37,8 +37,9 @@ public class orbScript : MonoBehaviour
         // Start is called before the first frame update
     void Start()
     {
-        powerupType = PowerupType.ACID;
-
+        if (Time.frameCount % 3 == 0) { powerupType = PowerupType.ACID;
+        }
+        else { powerupType = PowerupType.FIRE; }
     }
 
     // Update is called once per frame

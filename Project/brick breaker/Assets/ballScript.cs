@@ -84,7 +84,8 @@ public class ballScript : MonoBehaviour
 
 
             if (speed < 10)
-                speed = (int)(30 / GameObject.FindGameObjectsWithTag("perish").Length) + 3;
+                speed = (int)(30 / GameObject.FindGameObjectsWithTag("perish").Length) 
+                    + ((type == BallType.fire) ? 6 : 3);
             // speed can only be between 3 & 10.
         }
         else

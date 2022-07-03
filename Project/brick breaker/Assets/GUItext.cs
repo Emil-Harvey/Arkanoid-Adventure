@@ -47,15 +47,16 @@ public class GUItext : MonoBehaviour
         if (paddleScript.lives < 0 && gameState == winLose.playing)// gaem over
         {
             Debug.Log("game over");
-            scoreText.color = new Color (0.5f,0.0f,0.0f);
+            
             // kill all bricks & paddles
             GameObject[] allObjects = GameObject.FindGameObjectsWithTag("perish");
             foreach (GameObject obj in allObjects)
             {
                 Destroy(obj);
             }
-            //  show end screen
 
+            //  show end screen
+            scoreText.color = new Color(0.5f, 0.0f, 0.0f);
             UIpanel.transform.position = new Vector3(0, 0, 0);
             UIpanel.GetComponent<RectTransform>().sizeDelta = new Vector2(24, 4.8f);//<VerticalLayoutGroup>().padding.bottom = 3;
 

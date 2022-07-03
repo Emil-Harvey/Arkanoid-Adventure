@@ -23,7 +23,7 @@ public class paddleScript : MonoBehaviour
                 break;
             case PowerupType.FIRE:
                 //var ball = FindObjectOfType<ballScript>(); unnecessary assignment?
-                ball.ChangeType(BallType.green);
+                ball.ChangeType(BallType.fire);
                 break;
             default:
                 Debug.Log("bugged powerup recieved (?)");

@@ -16,7 +16,7 @@ public class brickScript : MonoBehaviour
 
     int health;
     [SerializeField] brickType currentType;
-    [SerializeField] GameObject damageEffectOverlay;
+    [SerializeField] GameObject[] damageEffectOverlays;
     float damageEffectTimer = 0.0f;
 
     public bool isPowerup = false;
@@ -75,7 +75,7 @@ public class brickScript : MonoBehaviour
             if (this_ball.type == BallType.green){
                 effects.b1 = true;
                 effects.b2 = true;// apply acid effect
-                var effectOverlay = Instantiate(damageEffectOverlay,
+                var effectOverlay = Instantiate(damageEffectOverlays[0],
                     transform.position +new Vector3(0,0,-0.1f), Quaternion.identity);// create acid sprite 'on top of' self
                 effectOverlay.transform.parent = this.transform;
                // Debug.Log("ACID EFFECT created!!");
@@ -83,11 +83,11 @@ public class brickScript : MonoBehaviour
             if (this_ball.type == BallType.fire) {
                 effects.b1 = true;
                 effects.b2 = false;// apply 'fire' effect
-                var effectOverlay = Instantiate(damageEffectOverlay, 
-                    transform.position +new Vector3(0,0,-0.1f), Quaternion.identity);// create acid sprite 'on top of' self
+                var effectOverlay = Instantiate(damageEffectOverlays[1], 
+                    transform.position +new Vector3(0,0,-0.1f), Quaternion.identity);// create fire sprite 'on top of' self
                 effectOverlay.transform.parent = this.transform;
             }
-            else {  }
+            else { ; }
         }
         /*{health -= 1;ballScript.score += 100; Debug.Log("score " + ballScript.score);}*/
         
