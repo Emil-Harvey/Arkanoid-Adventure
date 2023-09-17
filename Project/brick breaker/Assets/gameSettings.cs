@@ -24,7 +24,7 @@ public class gameSettings : MonoBehaviour
         /// really a binary switch
         if (value > 0.5){
             audioMixer_.SetFloat("qual_lp", 22000);
-            audioMixer_.SetFloat("qual_hp", 10);
+            audioMixer_.SetFloat("qual_hp", 40);
             Debug.Log("high qual!");
         }
         else{
@@ -33,7 +33,11 @@ public class gameSettings : MonoBehaviour
             Debug.Log("low qual!");
         }
     }
-
+    public void QuitGame()
+    {
+        Application.Quit();
+        
+    }
     // Start is called before the first frame update
     void Start()
     {

@@ -344,7 +344,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 6.2e-44, y: 1.1e-44, z: 6e-45, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -706,33 +706,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e7c7d72d6c74e36bc832beaabf7631, type: 3}
---- !u!21 &406394655
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Hidden/CRTShader
-  m_Shader: {fileID: 4800000, guid: f0660fafb078f90429e66eb658a23c4c, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Floats:
-    - hardPix: -2
-    - hardScan: -8
-    - maskDark: 0.5
-    - maskLight: 1.65
-    - resScale: 2
-    m_Colors:
-    - warp: {r: 0.0125, g: 0.0166, b: 0, a: 0}
 --- !u!1001 &426229090
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1573,7 +1546,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 5eda4f00d237d48b3b0d44f158a9b6af,
+      objectReference: {fileID: 21300000, guid: 07ed3520aad52409caa3a090efaef7cc,
         type: 3}
     - target: {fileID: 4436755577067324023, guid: 83e7c7d72d6c74e36bc832beaabf7631,
         type: 3}
@@ -1712,6 +1685,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e7c7d72d6c74e36bc832beaabf7631, type: 3}
+--- !u!21 &940510501
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Hidden/CRTShader
+  m_Shader: {fileID: 4800000, guid: f0660fafb078f90429e66eb658a23c4c, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Floats:
+    - hardPix: -2
+    - hardScan: -8
+    - maskDark: 0.5
+    - maskLight: 1.65
+    - resScale: 1
+    m_Colors:
+    - warp: {r: 0.0125, g: 0.0166, b: 0, a: 0}
 --- !u!1001 &1011380439
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3477,6 +3477,90 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e7c7d72d6c74e36bc832beaabf7631, type: 3}
+--- !u!1001 &1965891768
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8679344466017160952, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160952, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160952, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.4461966
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160952, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160952, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160952, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160952, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160952, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 41
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160952, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160952, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160952, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160958, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_Name
+      value: powerup orb (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160959, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160959, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.9931487
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160959, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52, type: 3}
 --- !u!1001 &1985147461
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4058,7 +4142,7 @@ PrefabInstance:
         type: 3}
       propertyPath: material
       value: 
-      objectReference: {fileID: 406394655}
+      objectReference: {fileID: 940510501}
     - target: {fileID: 8734817863020509935, guid: a0bb9580e9e5547b39cdaacfafe5dd45,
         type: 3}
       propertyPath: m_audioClip
@@ -4076,7 +4160,7 @@ PrefabInstance:
     - target: {fileID: 8679344466017160952, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.35
+      value: 20.19
       objectReference: {fileID: 0}
     - target: {fileID: 8679344466017160952, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
         type: 3}
@@ -4128,10 +4212,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160953, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: powerupType
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8679344466017160958, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
         type: 3}
       propertyPath: m_Name
       value: powerup orb
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160959, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160959, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.9931487
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679344466017160959, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52, type: 3}

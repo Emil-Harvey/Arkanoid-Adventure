@@ -8,9 +8,10 @@ public class ballScript : MonoBehaviour
 {
     public BallType type;
 
-    public int xDir;
-    public int yDir;
-    
+    public float xDir;
+    public float yDir;
+    //public Vector2 Dir;
+
     public GameObject paddle;
     public BoxCollider2D xCollide;
     public BoxCollider2D yCollide;
@@ -47,6 +48,10 @@ public class ballScript : MonoBehaviour
             else if (yCollide.IsTouching(collision.collider)) { yDir = -yDir; }
 
             gameObject.transform.Translate(xDir * 0.12f, yDir * 0.12f, 0.0f);//exit collision
+
+            //add some randomness to bounce direction for less predictability
+            xDir = Random.Range(0.1f, 1.0f)* (xDir / Mathf.Abs(xDir));
+            yDir = yDir / Mathf.Sqrt(xDir * xDir + yDir * yDir);// normalise upward part of vector to align with horizontal part. 
             //Debug.Log("new dir: (" + xDir + ", " + yDir + ")");
         }
         else
@@ -63,13 +68,19 @@ public class ballScript : MonoBehaviour
         isFree = false;
     }
 
+    /// Awake is called before Start
+    private void Awake()
+    {
+        //GameObject.Find("paddle").GetComponent<paddleScript>().AssignBallAwake(gameObject);
+    }
+
     /// Start is called before the first frame update
     void Start()
     {
-        paddleScript.lives = 3;
+        //paddleScript.lives = 3;
         audio = GetComponent<AudioSource>();
         GetComponent<SpriteRenderer>().sprite = Resources.LoadAll<Sprite>("Visual/Sprites/ball")[(int)type];
-
+        audio.PlayOneShot(impactSfx);
         Reset();
     }
 
@@ -81,14 +92,14 @@ public class ballScript : MonoBehaviour
         if (isFree)
         {
             gameObject.transform.Translate(xDir * speed * Time.deltaTime , yDir * speed * Time.deltaTime, 0.0f);
+            //transform.position -= new Vector3( transform.parent.position.x, 0, 0);
 
-
-            if (speed < 10)
-                speed = (int)(30 / GameObject.FindGameObjectsWithTag("perish").Length) 
+            if (speed < 12)
+                speed = (int)(14 / Mathf.Sqrt( GameObject.FindGameObjectsWithTag("perish").Length) )
                     + ((type == BallType.fire) ? 6 : 3);
-            // speed can only be between 3 & 10.
+            // speed can only be between 3 & 12.
         }
-        else
+        else // ball is being held to the paddle:
         {
 
             paddleXYZ = new Vector3(GameObject.Find("paddle").transform.position.x, -5.0f, 0.0f);// position ball should be
@@ -102,8 +113,10 @@ public class ballScript : MonoBehaviour
             if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Space))
             {
                 isFree = true;
-                yDir = 1;
-                xDir = Random.Range(0, 2) * 2 - 1; //1 or -1
+                xDir = Random.Range(-1.0f, 1.0f); //-1 to 1
+                yDir = 0.66f;
+                yDir = yDir / Mathf.Sqrt(xDir * xDir + yDir * yDir);// normalise upward part of vector to align with horizontal part. Starting yDir as 0.66 of course limits the angle of any possible result but no matter.
+
             }
         }
 
@@ -115,10 +128,11 @@ public class ballScript : MonoBehaviour
             audio.PlayOneShot(dieSfx);
 
             /// if no more balls
-            paddleScript.lives -= 1;
-            Reset();
+            //paddleScript.lives -= 1;
+            //Reset();
             //Debug.Log("lives " + lives);
-            /// else: Destroy(gameObject);
+            /// else: 
+            Destroy(gameObject);
         }
 
         

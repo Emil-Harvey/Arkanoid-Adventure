@@ -130,6 +130,9 @@ MonoBehaviour:
   damageEffectOverlays:
   - {fileID: 7338749055687786448, guid: 75c2f726cefdab74b9e5ace2ce81881f, type: 3}
   - {fileID: 4044371123705183139, guid: fd11e3902b19e7b4280ae3cc60a8fc70, type: 3}
+  damageEffectBurstVFX:
+  - {fileID: 4044371123705183139, guid: 29e060fe2fcc46e4d981d8a96f284b31, type: 3}
+  - {fileID: 4044371123705183139, guid: 66d6796afac79204293c6a4ae4a9076a, type: 3}
   isPowerup: 0
   powerupOverlay: {fileID: 2721734346403934878, guid: dd98a06b3082ece46ae52eaec9b817eb,
     type: 3}

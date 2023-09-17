@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 4457217637304550519}
   m_Layer: 0
   m_Name: ball
-  m_TagString: perish
+  m_TagString: ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,7 +153,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 1
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.8}
+  m_Size: {x: 0.1, y: 0.8}
   m_EdgeRadius: 0
 --- !u!61 &3440228202285737400
 BoxCollider2D:
@@ -179,7 +179,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 1
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.4}
+  m_Size: {x: 0.8, y: 0.1}
   m_EdgeRadius: 0
 --- !u!58 &696077662688063183
 CircleCollider2D:

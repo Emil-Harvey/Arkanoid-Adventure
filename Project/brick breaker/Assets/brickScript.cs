@@ -17,6 +17,7 @@ public class brickScript : MonoBehaviour
     int health;
     [SerializeField] brickType currentType;
     [SerializeField] GameObject[] damageEffectOverlays;
+    [SerializeField] GameObject[] damageEffectBurstVFX;
     float damageEffectTimer = 0.0f;
 
     public bool isPowerup = false;
@@ -58,10 +59,14 @@ public class brickScript : MonoBehaviour
                 globalAudio.PlayOneShot(destroySfx);
 
                 paddleScript.score += 90; // 100pts total for destroying
-                Debug.Log("score " + paddleScript.score);
+                //Debug.Log("score " + paddleScript.score);
 
                 if (isPowerup)
                     Instantiate(powerupType, transform.position, Quaternion.identity);
+                if (effects.b1 && effects.b2)
+                    Instantiate(damageEffectBurstVFX[0], transform.position, Quaternion.identity);
+                else if(effects.b1 && !effects.b2)
+                    Instantiate(damageEffectBurstVFX[1], transform.position, Quaternion.identity);
 
                 Destroy(gameObject);//no lives, gone
                 break;

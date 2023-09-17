@@ -21,7 +21,7 @@ Shader "Hidden/CRTShader"
         // 1.0/8.0 = extreme
         warp("Warp", Vector) = (0.0125, 0.0166, 0, 0)
         // resolution scale
-        resScale("ResolutionScale", Range(1, 16)) = 2 //4
+        resScale("ResolutionScale", Range(1, 16)) = 1 //4
     }
         SubShader
     {

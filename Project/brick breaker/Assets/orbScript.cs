@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PowerupType { ACID, FIRE, WIDE, SHORT}
+public enum PowerupType { ACID, FIRE, WIDE, SHORT, REVERSE, SLOW}
 
 public class orbScript : MonoBehaviour
 {
     public float speed = 1;
-    PowerupType powerupType;
+    public PowerupType powerupType = (PowerupType)(-1);
 
     public AudioClip destroySfx;
 
     private void OnTriggerEnter2D(Collider2D col)
     {
         Debug.Log("collided with: " + col.gameObject.name);
-        /// FIX COLLISION
-
+        
         if (col.gameObject.name != "paddle")
         {
             return;
@@ -37,9 +36,36 @@ public class orbScript : MonoBehaviour
         // Start is called before the first frame update
     void Start()
     {
-        if (Time.frameCount % 3 == 0) { powerupType = PowerupType.ACID;
+        if (powerupType == (PowerupType)(-1)) // assign a random powerup if none has been determined
+        {
+            switch(Time.frameCount % 6)
+            {
+                case 0:
+                    powerupType = PowerupType.ACID;
+                    break;
+                case 1:
+                    powerupType = PowerupType.FIRE;
+                    break;
+                case 2:
+                    powerupType = PowerupType.SHORT;
+                    break;
+                case 3:
+                    powerupType = PowerupType.WIDE;
+                    break;
+                case 4:
+                    powerupType = PowerupType.SLOW;
+                    break;
+                case 5:
+                    powerupType = PowerupType.REVERSE;
+                    break;
+                default:
+                    powerupType = PowerupType.REVERSE;
+                    break;
+            }
+            
         }
-        else { powerupType = PowerupType.FIRE; }
+
+        //transform.Translate(0,0,-4);
     }
 
     // Update is called once per frame

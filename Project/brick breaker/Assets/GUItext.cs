@@ -22,14 +22,21 @@ public class GUItext : MonoBehaviour
 
         GameObject[] allObjects = GameObject.FindGameObjectsWithTag("perish");
 
-        if(allObjects.Length < 3 || Input.GetKeyDown(KeyCode.BackQuote))
+        if(allObjects.Length <= 1 || Input.GetKeyDown(KeyCode.BackQuote))
         {// all bricks broken
+
+            foreach (GameObject obj in allObjects)
+            {
+                Destroy(obj);
+            }
+            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("ball"))
+                Destroy(obj);
 
             UIpanel.transform.position = new Vector3(0, 0, 0);
             UIpanel.GetComponent<RectTransform>().sizeDelta = new Vector2(24, 4.8f);//UIpanel.GetComponent<VerticalLayoutGroup>().padding.bottom = 3;
             scoreText.color = new Color(0.25f, 0.90f, 0.1f);
             scoreText.text = " Well Done! level complete \n" +
-                " SCORE  " + paddleScript.score +
+                " SCORE  " + paddleScript.score * (1+paddleScript.lives) +
                 "\n press enter to continue ";
 
             gameState = winLose.won;
@@ -51,9 +58,10 @@ public class GUItext : MonoBehaviour
             // kill all bricks & paddles
             GameObject[] allObjects = GameObject.FindGameObjectsWithTag("perish");
             foreach (GameObject obj in allObjects)
-            {
                 Destroy(obj);
-            }
+            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("ball"))
+                Destroy(obj);
+            
 
             //  show end screen
             scoreText.color = new Color(0.5f, 0.0f, 0.0f);
@@ -103,12 +111,17 @@ public class GUItext : MonoBehaviour
             {
                 SceneManager.LoadScene(0);//Application.LoadLevel(0);
             }
-
         }
         else if(Input.GetKeyDown(KeyCode.Return))// game is over, enter to return to menu
         {
             SceneManager.LoadScene(0); //Application.LoadLevel(0);
         }
+#if UNITY_WEBGL
+        else if (Input.GetMouseButtonDown(0))// let web/mobile users click screen to continue
+        {
+            SceneManager.LoadScene(0);
+        }
+#endif //UNITY_WEBGL
 
     }
 }
