@@ -15,7 +15,7 @@ public class paddleScript : MonoBehaviour
     [SerializeField] GameObject ballPrefab;
     [SerializeField] private List<GameObject> balls = new List<GameObject>();
 
-    bool started = false;
+    //bool started = false;
 
     public void OnPowerupGet(PowerupType type, float value = 0)
     {
@@ -67,7 +67,7 @@ public class paddleScript : MonoBehaviour
             balls.Add(initialBall); //initialBall.transform.parent = this.transform; //
         }
 
-        started = true;
+        //started = true;
     }
 
     // Update is called once per frame

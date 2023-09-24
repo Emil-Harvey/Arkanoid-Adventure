@@ -35,8 +35,8 @@ public class gameSettings : MonoBehaviour
     }
     public void QuitGame()
     {
+        HighscoreManager.Save();
         Application.Quit();
-        
     }
     // Start is called before the first frame update
     void Start()
