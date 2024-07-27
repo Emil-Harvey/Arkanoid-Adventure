@@ -44,6 +44,7 @@ public class GUItext : MonoBehaviour
             gameState = winLose.won;
 
             HighscoreManager.AddScoreToProfile(FinalScore, SceneManager.GetActiveScene().buildIndex);
+            HighscoreManager.Save();
             Debug.Log("saved Score to profile: " + FinalScore + ", level: " + SceneManager.GetActiveScene().buildIndex);
 
             var bgMusic = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();

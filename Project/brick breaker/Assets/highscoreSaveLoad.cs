@@ -27,7 +27,11 @@ public static class HighscoreManager
 
         formatter.Serialize(stream, data);
         stream.Close();
-
+        Debug.Log("saved: " + filepath);
+        foreach (var sco in data.scores)
+        {
+            Debug.Log(sco);
+        }
     }
     public static ScoreProfile Load()
     {
@@ -41,6 +45,11 @@ public static class HighscoreManager
             data = formatter.Deserialize(stream) as ScoreProfile;
             stream.Close();
 
+            Debug.Log("Loaded: " + filepath);
+            foreach(var sco in data.scores)
+            {
+                Debug.Log(sco);
+            }
             return data;
         }
         else

@@ -38,7 +38,8 @@ public class levelController : MonoBehaviour
     }
     private void Start()
     {
-
+        HighscoreManager.Load();
+        ApplyLevelUnlocks();
         BlackScreenOverlay = gameObject;
         BlackScreenOverlay.transform.localScale = overlayHiddenSize;
         Debug.Log("lvlCont. Start called");
@@ -56,9 +57,9 @@ public class levelController : MonoBehaviour
             {
                 levelIntroTimer--;
                 if(levelIntroTimer > 1)
-                    return;
+                    return; // keep going
                 else
-                {
+                {   // black wipe is close to finishing - finish now.
                     GameObject.Find("Panel").GetComponent<GUItext>().SwitchToInGameDisplay();
                     levelIntroTimer = 0;
                     ///  BlackScreenOverlay. set sort layer - 75ish
@@ -67,12 +68,12 @@ public class levelController : MonoBehaviour
             if (BlackScreenOverlay.transform.localScale.x > 1) // level just loaded
             {
                 BlackScreenOverlay.transform.localScale += Vector3.left; // shrink horizontally
-                Debug.Log("Shrinking");
+                //Debug.Log("Shrinking");
             }
             else
             {
                 BlackScreenOverlay.transform.localScale = overlayHiddenSize;
-                Debug.Log("Shrunk");
+                //Debug.Log("Shrunk");
             }
         }
         else if (levelToLoad < 0){}
@@ -107,6 +108,26 @@ public class levelController : MonoBehaviour
         BlackScreenOverlay.transform.localScale = overlayHiddenSize + (Vector3.right * 40);// cover full screen black
     }
 
+    void ApplyLevelUnlocks()
+    {
+        if(SceneManager.GetActiveScene().name == SceneManager.GetSceneByBuildIndex(16).name)
+        {
+            var levelButtons = GameObject.FindGameObjectsWithTag("level_button");
+            for (int lvl = 0; lvl <16; lvl++)
+            {
+                var button = levelButtons[lvl].GetComponent<UnityEngine.UI.Button>();
+                int scoreThreshold = lvl * 100;
+                if (HighscoreManager.data.scores[lvl>0?lvl-1:lvl] >= scoreThreshold)
+                {
+                    button.interactable = true;
+                }
+                else
+                {
+                    button.interactable = false;
+                }
+            }
+        }
+    }
 
     /*
     public void SetSfxVolume(float value)
