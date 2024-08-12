@@ -9,7 +9,7 @@ enum winLose { won,playing,lost,intro };
 public class GUItext : MonoBehaviour
 {
     public TMPro.TextMeshProUGUI scoreText;
-    public GameObject UIpanel;
+    public GameObject UIPanel;
 
     private winLose gameState;
 
@@ -34,8 +34,8 @@ public class GUItext : MonoBehaviour
 
             int FinalScore = paddleScript.score * (1 + paddleScript.lives);
 
-            UIpanel.transform.position = new Vector3(0, 0, 0);
-            UIpanel.GetComponent<RectTransform>().sizeDelta = new Vector2(24, 4.8f);//UIpanel.GetComponent<VerticalLayoutGroup>().padding.bottom = 3;
+            UIPanel.transform.position = new Vector3(0, 0, 0);
+            UIPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(24, 4.8f);//UIpanel.GetComponent<VerticalLayoutGroup>().padding.bottom = 3;
             scoreText.color = new Color(0.25f, 0.90f, 0.1f);
             scoreText.text = " Well Done! level complete \n" +
                 " SCORE  " + FinalScore +
@@ -71,8 +71,8 @@ public class GUItext : MonoBehaviour
 
             //  show end screen
             scoreText.color = new Color(0.5f, 0.0f, 0.0f);
-            UIpanel.transform.position = new Vector3(0, 0, 0);
-            UIpanel.GetComponent<RectTransform>().sizeDelta = new Vector2(24, 4.8f);//<VerticalLayoutGroup>().padding.bottom = 3;
+            UIPanel.transform.position = new Vector3(0, 0, 0);
+            UIPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(24, 4.8f);//<VerticalLayoutGroup>().padding.bottom = 3;
 
             scoreText.text = " Game Over \n" +
                 " SCORE " + paddleScript.score +
@@ -94,27 +94,36 @@ public class GUItext : MonoBehaviour
     {
         gameState = winLose.intro;
         scoreText.color = new Color(0.5f, 0.6f, 1.0f);//Pale blue
-        UIpanel.transform.position = new Vector3(0, 0, 0);
-        UIpanel.GetComponent<RectTransform>().sizeDelta = new Vector2(24, 4.8f);//<VerticalLayoutGroup>().padding.bottom = 3;
+        UIPanel.transform.position = new Vector3(0, 0, 0);
+        UIPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(24, 4.8f);//<VerticalLayoutGroup>().padding.bottom = 3;
 
         scoreText.text = " Level " +LevelNum + " \n"+
             " HI SCORE " + HighscoreManager.data.scores[LevelNum] + " \t";
     }
     public void SwitchToInGameDisplay() // mid game
     {
-        UIpanel.transform.position = new Vector3(0, 12, 0);// at top of level
-        UIpanel.GetComponent<RectTransform>().sizeDelta = new Vector2(24, 1.6f);
+        UIPanel.transform.position = new Vector3(0, 12, 0);// at top of level
+        UIPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(24, 1.6f);
         scoreText.text = "SCORE\t" + paddleScript.score + " LIVES  " + paddleScript.lives;
         scoreText.color = new Color(1f, 1f, 1f);
 
         gameState = winLose.playing;
     }
 
+    // Awake is alled when the script instance is being loaded
+    private void Awake()
+    {
+        UIPanel = gameObject;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        scoreText = UIpanel.transform.Find("scoreText").GetComponent<TMPro.TextMeshProUGUI>();
-        //gameState = winLose.playing;
+        
+        scoreText = UIPanel.transform.Find("scoreText").GetComponent<TMPro.TextMeshProUGUI>();
+        
+        if (gameState != winLose.intro && gameState != winLose.playing) // only if started debug
+            gameState = winLose.playing;
 
         //SwitchToInGameHUD();
         audio = GetComponent<AudioSource>();

@@ -117,12 +117,14 @@ public class levelController : MonoBehaviour
             {
                 var button = levelButtons[lvl].GetComponent<UnityEngine.UI.Button>();
                 int scoreThreshold = lvl * 100;
-                if (HighscoreManager.data.scores[lvl>0?lvl-1:lvl] >= scoreThreshold)
+                if (HighscoreManager.data.scores[lvl>0?lvl-1:0] >= scoreThreshold)
                 {
+                    //Debug.Log($"Button lvl {lvl} - score {scoreThreshold} passed: unlocked");
                     button.interactable = true;
                 }
                 else
                 {
+                    //Debug.Log($"Button lvl {lvl} - score {scoreThreshold}: locked");
                     button.interactable = false;
                 }
             }

@@ -24,14 +24,14 @@ public static class HighscoreManager
         BinaryFormatter formatter = new BinaryFormatter();
         var filepath = Application.persistentDataPath + "/Scores.sve";
         FileStream stream = new FileStream(filepath, FileMode.Create);
-
         formatter.Serialize(stream, data);
         stream.Close();
-        Debug.Log("saved: " + filepath);
-        foreach (var sco in data.scores)
-        {
-            Debug.Log(sco);
+
+        string s = "";
+        foreach (var sco in data.scores) { 
+            s += sco.ToString() + ", ";
         }
+        Debug.Log("saved: " + filepath + " - " + s);
     }
     public static ScoreProfile Load()
     {
@@ -45,11 +45,12 @@ public static class HighscoreManager
             data = formatter.Deserialize(stream) as ScoreProfile;
             stream.Close();
 
-            Debug.Log("Loaded: " + filepath);
-            foreach(var sco in data.scores)
-            {
-                Debug.Log(sco);
+            string s = "";
+            foreach (var sco in data.scores) { 
+                s += sco.ToString() + ", ";
             }
+            Debug.Log("Loaded: " + filepath + " - " + s);
+
             return data;
         }
         else

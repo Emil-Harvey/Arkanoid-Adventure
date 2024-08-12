@@ -7,7 +7,7 @@ TextureImporter:
     second: s0
   - first:
       213: 21300002
-    second: snowBrick_1
+    second: s1
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: snowBrick_1
+      name: s1
       rect:
         serializedVersion: 2
         x: 0
