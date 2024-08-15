@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PowerupType { ACID, FIRE, WIDE, SHORT, REVERSE, SLOW}
+public enum PowerupType { ACID, FIRE, WIDE, SHORT, REVERSE, SLOW, MULTI}
 
 public class orbScript : MonoBehaviour
 {
@@ -38,7 +38,7 @@ public class orbScript : MonoBehaviour
     {
         if (powerupType == (PowerupType)(-1)) // assign a random powerup if none has been determined
         {
-            switch(Time.frameCount % 6)
+            switch(Time.frameCount % 7)
             {
                 case 0:
                     powerupType = PowerupType.ACID;
@@ -59,7 +59,7 @@ public class orbScript : MonoBehaviour
                     powerupType = PowerupType.REVERSE;
                     break;
                 default:
-                    powerupType = PowerupType.REVERSE;
+                    powerupType = PowerupType.MULTI;
                     break;
             }
             

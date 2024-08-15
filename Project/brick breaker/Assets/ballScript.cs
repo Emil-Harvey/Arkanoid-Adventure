@@ -29,35 +29,41 @@ public class ballScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        if (!isFree) return;
+
         //Debug.Log("collided with: "+ collision.gameObject.name + " (" + xDir + ", " + yDir+")");
 
-        bool paddleCaught = ( collision.gameObject.name == "paddle" && (Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space)) );
+        bool paddleCaught = (collision.gameObject.name == "paddle" && (Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space)));
 
-        if (!paddleCaught)
-        {
-
-            audio.PlayOneShot(impactSfx);
-
-            if (xyCollide.IsTouching(collision.collider))
-            {//   bounce
-                yDir = -yDir;
-                xDir = -xDir;
-            }
-            else if (xCollide.IsTouching(collision.collider)) { xDir = -xDir; }
-            else if (yCollide.IsTouching(collision.collider)) { yDir = -yDir; }
-
-            gameObject.transform.Translate(xDir * 0.12f, yDir * 0.12f, 0.0f);//exit collision
-
-            //add some randomness to bounce direction for less predictability
-            xDir = Random.Range(0.1f, 1.0f)* (xDir / Mathf.Abs(xDir));
-            yDir = yDir / Mathf.Sqrt(xDir * xDir + yDir * yDir);// normalise upward part of vector to align with horizontal part. 
-            //Debug.Log("new dir: (" + xDir + ", " + yDir + ")");
-        }
-        else
+        if (paddleCaught)
         {
             isFree = false;
             Debug.Log("caught");
+            return;
+        }
+
+        audio.PlayOneShot(impactSfx);
+
+        if (xyCollide.IsTouching(collision.collider))
+        {//   bounce
+            yDir = -yDir;
+            xDir = -xDir;
+        }
+        else if (xCollide.IsTouching(collision.collider)) { xDir = -xDir; }
+        else if (yCollide.IsTouching(collision.collider)) { yDir = -yDir; }
+
+        gameObject.transform.Translate(xDir * 0.12f, yDir * 0.12f, 0.0f);//exit collision
+
+        //add some randomness to bounce direction for less predictability
+        xDir = Random.Range(0.1f, 1.0f) * Mathf.Sign(xDir);
+        yDir = yDir / Mathf.Sqrt(xDir * xDir + yDir * yDir);// normalise upward part of vector to align with horizontal part. 
+                                                            //Debug.Log("new dir: (" + xDir + ", " + yDir + ")");
+
+        if (type == BallType.beach || type == BallType.football || type == BallType.tennis)
+        {
+            var sr = GetComponent<SpriteRenderer>(); // spoof rotation
+            sr.flipX = Time.frameCount % 2 == 1;
+            sr.flipY = Time.frameCount % 4 >= 2;
         }
     }
 
@@ -141,18 +147,6 @@ public class ballScript : MonoBehaviour
     public void ChangeType(BallType newType)
     {
         type = newType;
-        /*switch (type) // after writing this it turns out that the way to change the sprite is the same code in every case.
-        {
-            case BallType.green:
-                //GetComponent<SpriteRenderer>().sprite = Resources.LoadAll<Sprite>("Visual/Sprites/ball")[(int)type];
-                break;
-            case BallType.fire:
-                break;
-            case BallType.ice:
-                break;
-            default:
-                break;
-        }*/
         GetComponent<SpriteRenderer>().sprite = Resources.LoadAll<Sprite>("Visual/Sprites/ball")[(int)type];
     }
 }

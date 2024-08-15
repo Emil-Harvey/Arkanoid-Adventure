@@ -144,7 +144,9 @@ public class GUItext : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                GameObject.Find("LevelTransition").GetComponent<levelController>().SetLevel(16); //SceneManager.LoadScene(16);//Application.LoadLevel(0);
+                //GameObject.Find("LevelTransition").GetComponent<levelController>().SetLevel(16); //SceneManager.LoadScene(16);
+                paddleScript.lives = -1;
+                CheckLose();
             }
         }
         else if(Input.GetKeyDown(KeyCode.Return))// game is over, enter to return to menu

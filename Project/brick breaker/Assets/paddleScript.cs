@@ -20,18 +20,19 @@ public class paddleScript : MonoBehaviour
     public void OnPowerupGet(PowerupType type, float value = 0)
     {
         var ball = FindObjectOfType<ballScript>(); // doesn't seem to work in multiple cases? inefficient if ball not needed
+        Debug.Log($"picked up {type}");
         switch (type)
         {
             case PowerupType.ACID:
-                //var ball
                 ball.ChangeType(BallType.green);
                 break;
             case PowerupType.FIRE:
-                //var ball = FindObjectOfType<ballScript>(); unnecessary assignment?
                 ball.ChangeType(BallType.fire);
                 break;
+            case PowerupType.MULTI:
+                 AddExtraBall(BallType.beach);
+                 break;
             case PowerupType.WIDE:
-                Debug.Log("wide");
                 paddleWidth = 3.0f;
                 GetComponent<SpriteRenderer>().size = new Vector2(paddleWidth*2, 0.8f);
                 break;
@@ -41,9 +42,11 @@ public class paddleScript : MonoBehaviour
                 break;
             case PowerupType.REVERSE:
                 speed = -speed;
+                GetComponent<SpriteRenderer>().sprite = Resources.LoadAll<Sprite>("Visual/Sprites/paddle")[3];
                 break;
             case PowerupType.SLOW:
                 speed *= 0.35f;
+                GetComponent<SpriteRenderer>().sprite = Resources.LoadAll<Sprite>("Visual/Sprites/paddle")[2];
                 break;
             default:
                 Debug.Log("bugged powerup recieved (?)");
@@ -51,7 +54,16 @@ public class paddleScript : MonoBehaviour
         }
     }
 
-    void Start()
+    void AddExtraBall(BallType type = BallType.grey)
+    {
+        var newBall = Instantiate(ballPrefab,
+                    transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+        if (type != BallType.grey)
+            newBall.GetComponent<ballScript>().ChangeType(type);
+        balls.Add(newBall); 
+    }
+
+void Start()
     {
         gameObject.transform.position = new Vector3(0.0f, -6.0f, 0.0f);// set start pos
         speed = 1.0f;
@@ -86,11 +98,7 @@ public class paddleScript : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.B))
-        {
-            var newBall = Instantiate(ballPrefab,
-                        transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-            balls.Add(newBall); //newBall.transform.parent = this.transform;//
-        }
+        
 
         for (int i = 0; i<balls.Count; i++){ // delete unused balls from array
             if (!balls[i])

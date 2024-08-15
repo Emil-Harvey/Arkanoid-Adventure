@@ -3955,7 +3955,7 @@ PrefabInstance:
     - target: {fileID: 2385138155551617365, guid: 571ac6233bf3e4fea890fa890c341346,
         type: 3}
       propertyPath: m_Name
-      value: UI Panel
+      value: Panel
       objectReference: {fileID: 0}
     - target: {fileID: 2710129432152464275, guid: 571ac6233bf3e4fea890fa890c341346,
         type: 3}
@@ -4690,7 +4690,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 7d2b477b85d6c4a0f9c43b88e0c1f863,
+      objectReference: {fileID: 21300006, guid: 7d2b477b85d6c4a0f9c43b88e0c1f863,
         type: 3}
     - target: {fileID: 259076804000446472, guid: e06f13c9c6cbf4cbc884bb6ea34e962b,
         type: 3}
