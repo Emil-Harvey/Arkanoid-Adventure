@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/level 1c.unity
     guid: ba3259b0a0e504deba362c031c87c563
   - enabled: 1
-    path: Assets/Scenes/level 1c duplicate (1d).unity
+    path: Assets/Scenes/level 1d.unity
     guid: 6dd7f6b9c7e64b647a292366cdcfdc49
   - enabled: 1
     path: Assets/Scenes/level 2a.unity

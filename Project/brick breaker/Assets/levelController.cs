@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
-
-using UnityEngine.Audio;
+using Button = UnityEngine.UI.Button;
 using UnityEngine.SceneManagement;
 
 //enum levelNumber {a1,b1,c1,d1,a2,b2,c2,d2,a3,b3,c3,d3,a4,b4,c4,d4 };
@@ -115,30 +113,44 @@ public class levelController : MonoBehaviour
             var levelButtons = GameObject.FindGameObjectsWithTag("level_button");
             for (int lvl = 0; lvl <16; lvl++)
             {
-                var button = levelButtons[lvl].GetComponent<UnityEngine.UI.Button>();
-                int scoreThreshold = lvl * 100;
+                var button = levelButtons[lvl].GetComponent<Button>();
+                GameObject nextLevel; 
+                switch (lvl)
+                {
+                    case 4 : nextLevel = GameObject.Find("level 1 to 2 button");
+                        break;
+                   case 8 : nextLevel = GameObject.Find("level 2 to 3 button");
+                        break;
+                    case 12 : nextLevel = GameObject.Find("level 4 button");
+                        break;
+                    default : nextLevel = null;
+                        break;
+                };
+                int scoreThreshold = lvl * 1000;
                 if (HighscoreManager.data.scores[lvl>0?lvl-1:0] >= scoreThreshold)
                 {
-                    //Debug.Log($"Button lvl {lvl} - score {scoreThreshold} passed: unlocked");
+                    Debug.Log($"Button lvl {lvl} - score {scoreThreshold} passed: unlocked");
                     button.interactable = true;
+                    if (nextLevel) nextLevel.SetActive(true);
                 }
                 else
                 {
                     //Debug.Log($"Button lvl {lvl} - score {scoreThreshold}: locked");
                     button.interactable = false;
+                    if (nextLevel) nextLevel.SetActive(false);
                 }
             }
         }
     }
 
-    /*
-    public void SetSfxVolume(float value)
+    public static bool IsLevelUnlocked(int lvl)
     {
-        audioMixer_.SetFloat("sfx_volu", Mathf.Log10(value) * 50);
+        if (lvl <= 0) return true;
+        if (lvl > HighscoreManager.data.scores.Length) return false;
+
+        int scoreThreshold = lvl * 1000;
+        Debug.Log("isUnlocked? score " + HighscoreManager.data.scores[lvl - 1]);
+        return HighscoreManager.data.scores[lvl - 1] >= scoreThreshold;
     }
-    public void SetMusicVolume(float value)
-    {
-        audioMixer_.SetFloat("music_volu", Mathf.Log10(value) * 50);
-    }
-    */
+    
 }

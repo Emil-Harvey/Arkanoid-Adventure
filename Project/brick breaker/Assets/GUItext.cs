@@ -17,42 +17,49 @@ public class GUItext : MonoBehaviour
     public AudioClip winSfx;
     public AudioClip failSfx;
     
-    void CheckWin() 
+    void CheckWin()
     {
 
         GameObject[] allObjects = GameObject.FindGameObjectsWithTag("perish");
 
-        if(allObjects.Length <= 1 || Input.GetKeyDown(KeyCode.BackQuote))
-        {// all bricks broken
+        if (allObjects.Length > 1 && !Input.GetKeyDown(KeyCode.BackQuote))
+            return;
+        
+        //else: all bricks broken
 
-            foreach (GameObject obj in allObjects)
-            {
-                Destroy(obj);
-            }
-            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("ball"))
-                Destroy(obj);
+        foreach (GameObject obj in allObjects)
+            Destroy(obj);
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("ball"))
+            Destroy(obj);
 
-            int FinalScore = paddleScript.score * (1 + paddleScript.lives);
+        int FinalScore = paddleScript.score * (1 + paddleScript.lives);
 
-            UIPanel.transform.position = new Vector3(0, 0, 0);
-            UIPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(24, 4.8f);//UIpanel.GetComponent<VerticalLayoutGroup>().padding.bottom = 3;
-            scoreText.color = new Color(0.25f, 0.90f, 0.1f);
-            scoreText.text = " Well Done! level complete \n" +
-                " SCORE  " + FinalScore +
-                "\n press enter to continue ";
+        int lvl = SceneManager.GetActiveScene().buildIndex;
+        bool wasNextLvlUnlocked = levelController.IsLevelUnlocked(lvl + 1);
 
-            gameState = winLose.won;
+        HighscoreManager.AddScoreToProfile(FinalScore, lvl);
+        HighscoreManager.Save();
+        Debug.Log("saved Score to profile: " + FinalScore + ", level: " + lvl);
 
-            HighscoreManager.AddScoreToProfile(FinalScore, SceneManager.GetActiveScene().buildIndex);
-            HighscoreManager.Save();
-            Debug.Log("saved Score to profile: " + FinalScore + ", level: " + SceneManager.GetActiveScene().buildIndex);
+        bool newLvlUnlocked = (lvl % 4 == 3) && !wasNextLvlUnlocked && levelController.IsLevelUnlocked(lvl + 1);
+        string extraRow = newLvlUnlocked? "\n NEW LEVEL UNLOCKED" : "";
 
-            var bgMusic = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
-            bgMusic.mute = true;//.Stop(); // stop bg music
-            bgMusic.Pause(); // stop bg music
-            bgMusic.Stop(); // stop bg music
-            audio.PlayOneShot(winSfx);
-        }
+        UIPanel.transform.position = new Vector3(0, 0, 0);
+        UIPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(24, newLvlUnlocked? 6.8f : 4.8f);//UIpanel.GetComponent<VerticalLayoutGroup>().padding.bottom = 3;
+        scoreText.color = new Color(0.25f, 0.90f, 0.1f);
+        scoreText.text = " Well Done! level complete " 
+                        + "\n SCORE  "  +  FinalScore 
+                        +   extraRow
+                        + "\n press enter to continue ";
+
+        gameState = winLose.won;
+
+
+        var bgMusic = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
+        bgMusic.mute = true;//.Stop(); // stop bg music
+        bgMusic.Pause(); // stop bg music
+        bgMusic.Stop(); // stop bg music
+        audio.PlayOneShot(winSfx);
 
     }
     void CheckLose()
