@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.U2D;
+﻿using UnityEngine;
 
 enum brickType { stoneBrick, mossStoneBrick, sandBrick, mossSandBrick, snowBrick, iceBrick, metalBrick, goldBrick }
 struct flag { public bool b1, b2; }
@@ -33,6 +30,7 @@ public class brickScript : MonoBehaviour
     public AudioClip destroySfx;
 
     flag effects; //= { false, false };
+    //(bool enabled, bool isFire) effects;
 
     void takeDamage()
     {

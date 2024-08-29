@@ -18,12 +18,12 @@ public class ScoreProfile
 }
 public static class HighscoreManager
 {
-    public static ScoreProfile data = new ScoreProfile();
+    public static ScoreProfile data = new();
     public static void Save()
     {
-        BinaryFormatter formatter = new BinaryFormatter();
+        BinaryFormatter formatter = new ();
         var filepath = Application.persistentDataPath + "/Scores.sve";
-        FileStream stream = new FileStream(filepath, FileMode.Create);
+        FileStream stream = new (filepath, FileMode.Create);
         formatter.Serialize(stream, data);
         stream.Close();
 
@@ -39,8 +39,8 @@ public static class HighscoreManager
 
         if (File.Exists(filepath))
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(filepath, FileMode.Open);
+            BinaryFormatter formatter = new ();
+            FileStream stream = new (filepath, FileMode.Open);
 
             data = formatter.Deserialize(stream) as ScoreProfile;
             stream.Close();
