@@ -10,7 +10,7 @@ public class paddleScript : MonoBehaviour
     public static int lives = 3;
     public static int score = 0;
 
-    static bool isFinalLevel => UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex == 15;
+    static bool isFinalLevel => UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex == 16;
 
     private static float input = 0;
 

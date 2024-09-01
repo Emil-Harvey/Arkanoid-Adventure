@@ -38,15 +38,15 @@ public class GUItext : MonoBehaviour
         HighscoreManager.Save();
         Debug.Log("saved Score to profile: " + FinalScore + ", level: " + lvl);
 
-        bool newLvlUnlocked = (lvl % 4 == 3) && !wasNextLvlUnlocked && levelController.IsLevelUnlocked(lvl + 1);
-        string extraRow = newLvlUnlocked? "\n NEW LEVEL UNLOCKED" : "";
+        bool newLvlUnlocked = (lvl % 4 == 0) && !wasNextLvlUnlocked && levelController.IsLevelUnlocked(lvl + 1);
+        string unlockMessage = newLvlUnlocked? "\n NEW LEVEL UNLOCKED" : "";
 
         UIPanel.transform.position = new Vector3(0, 0, 0);
         UIPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(24, newLvlUnlocked? 6.8f : 4.8f);//UIpanel.GetComponent<VerticalLayoutGroup>().padding.bottom = 3;
         scoreText.color = new Color(0.25f, 0.90f, 0.1f);
         scoreText.text = " Well Done! level complete " 
                         + "\n SCORE  "  +  FinalScore 
-                        +   extraRow
+                        +  unlockMessage
                         + "\n press enter to continue ";
 
         gameState = winLose.won;
