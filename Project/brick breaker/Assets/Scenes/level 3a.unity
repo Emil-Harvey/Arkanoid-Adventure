@@ -4767,6 +4767,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4532873742265947206, guid: e06f13c9c6cbf4cbc884bb6ea34e962b,
+        type: 3}
+      propertyPath: scrolling
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4532873742265947206, guid: e06f13c9c6cbf4cbc884bb6ea34e962b,
+        type: 3}
+      propertyPath: scrollVector.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4532873742265947206, guid: e06f13c9c6cbf4cbc884bb6ea34e962b,
+        type: 3}
+      propertyPath: scrollVector.x
+      value: -0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e06f13c9c6cbf4cbc884bb6ea34e962b, type: 3}
 --- !u!1001 &561035352838341622

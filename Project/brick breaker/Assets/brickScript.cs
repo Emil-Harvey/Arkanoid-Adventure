@@ -56,7 +56,7 @@ public class brickScript : MonoBehaviour
                 AudioSource globalAudio = GameObject.FindGameObjectWithTag("global_audio").GetComponent<AudioSource>();
                 globalAudio.PlayOneShot(destroySfx);
 
-                paddleScript.score += 90; // 100pts total for destroying
+                paddleScript.score += 90; // >=100pts total for destroying
                 //Debug.Log("score " + paddleScript.score);
 
                 if (isPowerup)
@@ -101,7 +101,7 @@ public class brickScript : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
 
         sr = GetComponent<SpriteRenderer>();

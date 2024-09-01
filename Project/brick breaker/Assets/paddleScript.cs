@@ -10,8 +10,6 @@ public class paddleScript : MonoBehaviour
     public static int lives = 3;
     public static int score = 0;
 
-    static bool isFinalLevel => UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex == 16;
-
     private static float input = 0;
 
     public static paddleScript instance;
@@ -89,7 +87,7 @@ public class paddleScript : MonoBehaviour
             balls.Add(initialBall); //initialBall.transform.parent = this.transform; //
         }
 
-        if (isFinalLevel)
+        if (levelController.isFinalLevel)
             lives = 0;
     }
 

@@ -33,16 +33,20 @@ public class GUItext : MonoBehaviour
 
         int lvl = SceneManager.GetActiveScene().buildIndex;
         bool wasNextLvlUnlocked = levelController.IsLevelUnlocked(lvl + 1);
+        string unlockMessage = "Congratulations. YOU WIN!";
 
         HighscoreManager.AddScoreToProfile(FinalScore, lvl);
         HighscoreManager.Save();
         Debug.Log("saved Score to profile: " + FinalScore + ", level: " + lvl);
 
-        bool newLvlUnlocked = (lvl % 4 == 0) && !wasNextLvlUnlocked && levelController.IsLevelUnlocked(lvl + 1);
-        string unlockMessage = newLvlUnlocked? "\n NEW LEVEL UNLOCKED" : "";
+        if (!levelController.isFinalLevel)
+        {
+            bool newLvlUnlocked = (lvl % 4 == 0) && !wasNextLvlUnlocked && levelController.IsLevelUnlocked(lvl + 1);
+            unlockMessage = newLvlUnlocked ? "\n NEW LEVEL UNLOCKED" : "";
+        }
 
         UIPanel.transform.position = new Vector3(0, 0, 0);
-        UIPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(24, newLvlUnlocked? 6.8f : 4.8f);//UIpanel.GetComponent<VerticalLayoutGroup>().padding.bottom = 3;
+        UIPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(24, unlockMessage.Length>0 ? 6.8f : 4.8f);//UIpanel.GetComponent<VerticalLayoutGroup>().padding.bottom = 3;
         scoreText.color = new Color(0.25f, 0.90f, 0.1f);
         scoreText.text = " Well Done! level complete " 
                         + "\n SCORE  "  +  FinalScore 
@@ -148,14 +152,13 @@ public class GUItext : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                //GameObject.Find("LevelTransition").GetComponent<levelController>().SetLevel(16); //SceneManager.LoadScene(16);
                 paddleScript.lives = -1;
                 CheckLose();
             }
         }
         else if(Input.GetKeyDown(KeyCode.Return))// game is over, enter to return to menu
         {
-            GameObject.Find("LevelTransition").GetComponent<levelController>().SetLevel(16); //Application.LoadLevel(0);
+            GameObject.Find("LevelTransition").GetComponent<levelController>().SetLevel(0);
         }
 #if UNITY_WEBGL
         else if (Input.GetMouseButtonDown(0)) // let web/mobile users click screen to continue

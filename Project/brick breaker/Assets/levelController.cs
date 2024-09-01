@@ -8,22 +8,26 @@ public class levelController : MonoBehaviour
 {
 
     int levelToLoad = -1;
-    int fromGameLevel = -1;
-    GameObject BlackScreenOverlay;
-    Vector3 overlayHiddenSize = Vector3.up * 30.0f;// (0,30,0)
+    const int MENU = 0;
+    static int fromGameLevel = -1;
+    GameObject BlackScreenOverlay => gameObject;
+    static readonly Vector3 overlayHiddenSize = Vector3.up * 30.0f;// (0,30,0)
     int levelIntroTimer = 0;
 
-    [SerializeField] protected Vector3[] LevelSelectUIOffsets;
+    [SerializeField] protected GameObject[] levelButtons;
+    [SerializeField] protected Vector3[] levelSelectUIOffsets;
 
     static bool init = false;
+
+    public static bool isFinalLevel => SceneManager.GetActiveScene().buildIndex == 16;
 
     /// called by the UI buttons
     public void SetLevel(int level)
     {
         levelToLoad = level; 
 
-        if (levelToLoad == 16)
-            fromGameLevel = (SceneManager.GetActiveScene().buildIndex + 1) / 4;
+        if (levelToLoad == MENU)
+            fromGameLevel = (SceneManager.GetActiveScene().buildIndex) / 4;
         else
             fromGameLevel = -1;
     }
@@ -42,15 +46,8 @@ public class levelController : MonoBehaviour
     {
         HighscoreManager.Load();
         ApplyLevelUnlocks();
-        BlackScreenOverlay = gameObject;
         BlackScreenOverlay.transform.localScale = overlayHiddenSize;
 
-        if (fromGameLevel >= 0 && SceneManager.GetActiveScene().buildIndex == 16)
-        {
-            Debug.Log("lvlController - re-enabling animator");
-            GameObject.Find("Canvas").GetComponent<Animator>().enabled = true;
-            fromGameLevel = -1;
-        }
         //Debug.Log("lvlCont. Start called");
         SceneManager.sceneLoaded += OnLevelLoaded; // start listening for a sceneLoad event.
     }
@@ -63,8 +60,6 @@ public class levelController : MonoBehaviour
         }
         else if (levelToLoad < 0)// just finished loading a level
         {
-            
-
             if (levelIntroTimer > 0)
             {
                 levelIntroTimer--;
@@ -87,7 +82,6 @@ public class levelController : MonoBehaviour
                 //Debug.Log("Shrunk");
             }
         }
-        else if (levelToLoad < 0){}
         else if (BlackScreenOverlay.transform.localScale.x > 40)
         {
             SceneManager.LoadScene(levelToLoad); 
@@ -105,8 +99,8 @@ public class levelController : MonoBehaviour
     
     void OnLevelLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("OnLevelLoaded: " + scene.name + " " + scene.buildIndex);
-        if (scene.buildIndex != 16)
+        Debug.Log("OnLevelLoaded: " + scene.name + " ~ " + scene.buildIndex);
+        if (scene.buildIndex != MENU)
         {
             Debug.Log("New Level: " + scene.name + " latest Score: " + HighscoreManager.data.scores[scene.buildIndex]);
             levelIntroTimer = 240;
@@ -124,13 +118,8 @@ public class levelController : MonoBehaviour
             { 
                 var UI = GameObject.Find("Canvas"); 
                 if (UI == null) return;
-                var posLock = UI.GetComponent<Animator>();
-                
-                Debug.Log("Moving to -: " + LevelSelectUIOffsets[fromGameLevel]);
-                posLock.enabled = false;
-                UI.transform.position = LevelSelectUIOffsets[fromGameLevel];
-                UI.GetComponent<RectTransform>().position = LevelSelectUIOffsets[fromGameLevel];
-                UI.GetComponent<RectTransform>().anchoredPosition = LevelSelectUIOffsets[fromGameLevel];
+                UI.GetComponent<Animator>().Play("teleport_to_" + fromGameLevel);
+                fromGameLevel = -1;
             }
         }
         BlackScreenOverlay.transform.localScale = overlayHiddenSize + (Vector3.right * 40);// cover full screen black
@@ -138,10 +127,9 @@ public class levelController : MonoBehaviour
 
     void ApplyLevelUnlocks()
     {
-        if(SceneManager.GetActiveScene().name == SceneManager.GetSceneByBuildIndex(16).name)
+        if(SceneManager.GetActiveScene().name == "menu")
         {
-            var levelButtons = GameObject.FindGameObjectsWithTag("level_button");
-            for (int lvl = 0; lvl <16; lvl++)
+            for (int lvl = 0; lvl < 16; ++lvl)
             {
                 var button = levelButtons[lvl].GetComponent<Button>();
                 GameObject nextLevel; 
@@ -156,10 +144,10 @@ public class levelController : MonoBehaviour
                     default : nextLevel = null;
                         break;
                 };
-                int scoreThreshold = lvl * 1000;
-                if (HighscoreManager.data.scores[lvl>0?lvl-1:0] >= scoreThreshold)
+                
+                if (IsLevelUnlocked(lvl))
                 {
-                    Debug.Log($"Button lvl {lvl} - score {scoreThreshold} passed: unlocked");
+                    Debug.Log($"Button lvl {lvl} - score passed: unlocked. {(nextLevel?"- next level":"NO next level")}");
                     button.interactable = true;
                     if (nextLevel) nextLevel.SetActive(true);
                 }
@@ -167,6 +155,7 @@ public class levelController : MonoBehaviour
                 {
                     //Debug.Log($"Button lvl {lvl} - score {scoreThreshold}: locked");
                     button.interactable = false;
+                    button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "locked";
                     if (nextLevel) nextLevel.SetActive(false);
                 }
             }
@@ -179,7 +168,7 @@ public class levelController : MonoBehaviour
         if (lvl > HighscoreManager.data.scores.Length) return false;
 
         int scoreThreshold = lvl * 1000;
-        Debug.Log("isUnlocked? score " + HighscoreManager.data.scores[lvl - 1]);
+        //Debug.Log("isUnlocked? score " + HighscoreManager.data.scores[lvl - 1]);
         return HighscoreManager.data.scores[lvl - 1] >= scoreThreshold;
     }
     
