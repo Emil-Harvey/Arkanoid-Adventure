@@ -138,7 +138,7 @@ MonoBehaviour:
     type: 3}
   powerupType: {fileID: 8679344466017160958, guid: d7fe0079ed0c0f9448a7ffbf88cc5a52,
     type: 3}
-  impactSfx: {fileID: 8300000, guid: 022a38c5990ce9945b20f0ed4f6cc236, type: 3}
+  impactSfx: {fileID: 8300000, guid: cc2b90bf249619e42b2bd1d9289e11fb, type: 3}
   destroySfx: {fileID: 8300000, guid: ad5a50ddc2f1e1148980b2c9176d3772, type: 3}
 --- !u!50 &4436755577067324017
 Rigidbody2D:

@@ -163,7 +163,7 @@ public class GUItext : MonoBehaviour
 #if UNITY_WEBGL
         else if (Input.GetMouseButtonDown(0)) // let web/mobile users click screen to continue
         {
-            GameObject.Find("LevelTransition").GetComponent<levelController>().SetLevel(16);
+            GameObject.Find("LevelTransition").GetComponent<levelController>().SetLevel(0);
         }
 #endif //UNITY_WEBGL
 

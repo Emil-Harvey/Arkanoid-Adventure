@@ -279,6 +279,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 137401}
   m_CullTransparentMesh: 0
+--- !u!21 &78241539
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Hidden/CRTShader
+  m_Shader: {fileID: 4800000, guid: f0660fafb078f90429e66eb658a23c4c, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Floats:
+    - hardPix: -2
+    - hardScan: -8
+    - maskDark: 0.5
+    - maskLight: 1.65
+    - resScale: 1
+    m_Colors:
+    - warp: {r: 0.0125, g: 0.0166, b: 0, a: 0}
 --- !u!1 &81440747
 GameObject:
   m_ObjectHideFlags: 0
@@ -1347,33 +1374,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 251439354}
   m_CullTransparentMesh: 0
---- !u!21 &280460928
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Hidden/CRTShader
-  m_Shader: {fileID: 4800000, guid: f0660fafb078f90429e66eb658a23c4c, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Floats:
-    - hardPix: -2
-    - hardScan: -8
-    - maskDark: 0.5
-    - maskLight: 1.65
-    - resScale: 1
-    m_Colors:
-    - warp: {r: 0.0125, g: 0.0166, b: 0, a: 0}
 --- !u!1 &296543560
 GameObject:
   m_ObjectHideFlags: 0
@@ -2632,7 +2632,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: button
+  m_text: test SFX
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9b59cba8202054945b1f6c1d2a1281d2, type: 2}
   m_sharedMaterial: {fileID: 6836864138170600294, guid: 9b59cba8202054945b1f6c1d2a1281d2,
@@ -2702,10 +2702,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 509153794}
-    characterCount: 6
+    characterCount: 8
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -12627,7 +12627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbb66f3ec34e38c428a1946effa8271c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 280460928}
+  material: {fileID: 78241539}
 --- !u!82 &2046781922
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12647,7 +12647,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 0
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -13711,6 +13711,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 16.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 7913196739084849720, guid: 7ec7cbe3d96dfd540bbe266ed6b083a8,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7913196739084849722, guid: 7ec7cbe3d96dfd540bbe266ed6b083a8,
         type: 3}

@@ -1,7 +1,8 @@
-# Arkanoid-Adventure
-A retro-style brick-breaker clone I'd like to polish up and complete :)
+# Arkatron-Adventure
+A retro-style brick-breaker clone that is now complete and ready to play!
 
-(16) unique levels across four distinct themes... 
-Many more features, levels and improvements to come, so follow if you want to keep track:
+https://emil-io.itch.io/arkatron-adventure 
 
-https://emil-io.itch.io/arkanoid-adventure
+I began this game during my work experience at Ninja Kiwi in 2019, and came back to it in 2021/2022, releasing on Itch with several updates, eventually completing in 2024 :)
+
+INSTALL now on Windows PC, or PLAY the demo in your browser today!

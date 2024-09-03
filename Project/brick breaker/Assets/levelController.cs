@@ -20,6 +20,7 @@ public class levelController : MonoBehaviour
     static bool init = false;
 
     public static bool isFinalLevel => SceneManager.GetActiveScene().buildIndex == 16;
+    public /*static*/ bool isOverlayHidden => BlackScreenOverlay?.transform.localScale.x <= 0;
 
     /// called by the UI buttons
     public void SetLevel(int level)
@@ -39,6 +40,10 @@ public class levelController : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             init = true;
         }
+        //else
+        //{
+        //    Destroy(gameObject);
+        //}
         Debug.Log("lvlCont. Awake called");
     }
 
@@ -54,7 +59,7 @@ public class levelController : MonoBehaviour
 
     private void Update()
     {
-        if (levelToLoad < 0 && BlackScreenOverlay.transform.localScale.x <= 0)
+        if (levelToLoad < 0 && isOverlayHidden)
         {// mid-game
             return;
         }
@@ -71,24 +76,25 @@ public class levelController : MonoBehaviour
                     levelIntroTimer = 0;
                 }
             }
-            if (BlackScreenOverlay.transform.localScale.x > 1) // level just loaded
+
+            if (BlackScreenOverlay.transform.localScale.x > 1  // level just loaded
+                && !(Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Space))) // skip if player clicks.
             {
                 BlackScreenOverlay.transform.localScale += Vector3.left; // shrink horizontally
-                //Debug.Log("Shrinking");
             }
             else
             {
+                // finish transition.
                 BlackScreenOverlay.transform.localScale = overlayHiddenSize;
-                //Debug.Log("Shrunk");
             }
         }
-        else if (BlackScreenOverlay.transform.localScale.x > 40)
+        else if (BlackScreenOverlay.transform.localScale.x > 40) // if level is pending load & outro swipe finishes.
         {
             SceneManager.LoadScene(levelToLoad); 
 
             levelToLoad = -1;
         }
-        else
+        else // start/continue outro swipe.
         {
             BlackScreenOverlay.transform.localScale += Vector3.right; // grow horizontally
         }
@@ -100,6 +106,8 @@ public class levelController : MonoBehaviour
     void OnLevelLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("OnLevelLoaded: " + scene.name + " ~ " + scene.buildIndex);
+        BlackScreenOverlay.transform.localScale = overlayHiddenSize + (Vector3.right * 40);// cover full screen black
+
         if (scene.buildIndex != MENU)
         {
             Debug.Log("New Level: " + scene.name + " latest Score: " + HighscoreManager.data.scores[scene.buildIndex]);
@@ -108,6 +116,8 @@ public class levelController : MonoBehaviour
 
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+            
+            
         }
         else
         {
@@ -121,15 +131,22 @@ public class levelController : MonoBehaviour
                 UI.GetComponent<Animator>().Play("teleport_to_" + fromGameLevel);
                 fromGameLevel = -1;
             }
+
+            //HighscoreManager.Load();
+            //ApplyLevelUnlocks();
+            ///Destroy(gameObject);
+            ///BlackScreenOverlay = null;
         }
-        BlackScreenOverlay.transform.localScale = overlayHiddenSize + (Vector3.right * 40);// cover full screen black
+        
     }
 
     void ApplyLevelUnlocks()
     {
         if(SceneManager.GetActiveScene().name == "menu")
         {
+
             for (int lvl = 0; lvl < 16; ++lvl)
+
             {
                 var button = levelButtons[lvl].GetComponent<Button>();
                 GameObject nextLevel; 
@@ -144,8 +161,11 @@ public class levelController : MonoBehaviour
                     default : nextLevel = null;
                         break;
                 };
-                
+#if UNITY_WEBGL                
+                if (IsLevelUnlocked(lvl) && lvl < 5)
+#else
                 if (IsLevelUnlocked(lvl))
+#endif
                 {
                     Debug.Log($"Button lvl {lvl} - score passed: unlocked. {(nextLevel?"- next level":"NO next level")}");
                     button.interactable = true;

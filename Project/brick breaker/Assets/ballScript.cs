@@ -6,24 +6,28 @@ public class ballScript : MonoBehaviour
 {
     public BallType type;
 
-    public float xDir;
-    public float yDir;
-    //public Vector2 Dir;
+    
+    
+    
 
     public GameObject paddle;
     public BoxCollider2D xCollide;
     public BoxCollider2D yCollide;
     public CircleCollider2D xyCollide;// for corners
-    private bool isFree;
+    private Rigidbody2D rb;
+    private Vector2 velocity => rb.velocity;
+
+    private bool isFree = true;
     private Vector3 paddleXYZ;
 
     int speed = 3;
 
     AudioSource audio;
     public AudioClip impactSfx;
+    public AudioClip fireImpactSfx;
     public AudioClip dieSfx;
 
-
+    bool isOverlayHidden => (GameObject.Find("LevelTransition")?.GetComponent<levelController>().isOverlayHidden ?? true);
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -40,22 +44,10 @@ public class ballScript : MonoBehaviour
             return;
         }
 
-        audio.PlayOneShot(impactSfx);
-
-        if (xyCollide.IsTouching(collision.collider))
-        {//   bounce
-            yDir = -yDir;
-            xDir = -xDir;
-        }
-        else if (xCollide.IsTouching(collision.collider)) { xDir = -xDir; }
-        else if (yCollide.IsTouching(collision.collider)) { yDir = -yDir; }
-
-        gameObject.transform.Translate(xDir * 0.12f, yDir * 0.12f, 0.0f);//exit collision
-
-        //add some randomness to bounce direction for less predictability
-        xDir = Random.Range(0.1f, 1.0f) * Mathf.Sign(xDir);
-        yDir /= Mathf.Sqrt(xDir * xDir + yDir * yDir);// normalise upward part of vector to align with horizontal part. 
-                                                            //Debug.Log("new dir: (" + xDir + ", " + yDir + ")");
+        if (type != BallType.fire)
+            audio.PlayOneShot(impactSfx);
+        else
+            audio.PlayOneShot(fireImpactSfx);
 
         if (type == BallType.beach || type == BallType.football || type == BallType.tennis)
         {
@@ -67,14 +59,14 @@ public class ballScript : MonoBehaviour
 
     private void Reset()
     {
-        xDir = 0;
-        yDir = 0;
+        rb.velocity = Vector2.zero;
         isFree = false;
     }
 
     /// Awake is called before Start
     private void Awake()
     {
+        rb = GetComponent<Rigidbody2D>();
         audio = GetComponent<AudioSource>();
         GetComponent<SpriteRenderer>().sprite = Resources.LoadAll<Sprite>("Visual/Sprites/ball")[(int)type];
     }
@@ -93,13 +85,22 @@ public class ballScript : MonoBehaviour
         
         if (isFree)
         {
-            gameObject.transform.Translate(xDir * speed * Time.deltaTime , yDir * speed * Time.deltaTime, 0.0f);
-            //transform.position -= new Vector3( transform.parent.position.x, 0, 0);
+            //gameObject.transform.Translate(xDir * speed * Time.deltaTime , yDir * speed * Time.deltaTime, 0.0f);
 
             if (speed < 12)
                 speed = (int)(14 / Mathf.Sqrt( GameObject.FindGameObjectsWithTag("perish").Length) )
-                    + ((type == BallType.fire) ? 6 : 3);
+                    + ((type == BallType.fire) ? 6 : 4);
             // speed can only be between 3 & 12.
+
+            // regulate velocity to ensure angle is mostly diagonal, not too vertical or horizontal
+            if ((velocity.magnitude != speed || Mathf.Abs(velocity.normalized.y - 0.5f) > 0.45))
+            {
+                if (Mathf.Abs(velocity.x) > Mathf.Abs(velocity.y))
+                    rb.velocity = new Vector2(velocity.x * 0.8f, velocity.y * 1.2f).normalized * speed;
+                else
+                    rb.velocity = new Vector2(velocity.x * 1.2f, velocity.y * 0.8f).normalized * speed;
+                Debug.Log("new velocity: " + velocity);
+            }
         }
         else // ball is being held to the paddle:
         {
@@ -112,13 +113,14 @@ public class ballScript : MonoBehaviour
             gameObject.transform.position = paddleXYZ;
 
             /// wait for input
-            if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Space))
+            if ((Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Space)) && isOverlayHidden)
             {
                 isFree = true;
-                xDir = Random.Range(-1.0f, 1.0f); //-1 to 1
-                yDir = 0.66f;
-                yDir /= Mathf.Sqrt(xDir * xDir + yDir * yDir);// normalise upward part of vector to align with horizontal part. Starting yDir as 0.66 of course limits the angle of any possible result but no matter.
-
+                Vector2 dir;
+                dir.x = Random.Range(-1.0f, 1.0f); //-1 to 1
+                dir.y = 0.66f;
+                dir.y /= Mathf.Sqrt(dir.x * dir.x + dir.y * dir.y); // normalise upward part of vector to align with horizontal part. Starting yDir as 0.66 of course limits the angle of any possible result but no matter.
+                GetComponent<Rigidbody2D>().velocity = dir * speed;
             }
         }
 
